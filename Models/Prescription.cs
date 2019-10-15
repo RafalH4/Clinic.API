@@ -10,7 +10,6 @@ namespace Clinic.API.Models
         public Guid Id { get; set; }
         public Appointment Appointment { get; set; }
         public DateTime CreatedAt { get; set; }
-        public Drug Drug { get; set; }
 
     }
 }
