@@ -7,5 +7,10 @@ namespace Clinic.API.Models
 {
     public class MedOffice
     {
+        public Guid Id { get; set; }
+        public List<Appointment> Appointments { get; set; }
+        public int OfficeNumber { get; set; }
+        public string Description { get; set; }
+
     }
 }

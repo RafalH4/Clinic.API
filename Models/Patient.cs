@@ -7,5 +7,6 @@ namespace Clinic.API.Models
 {
     public class Patient : User
     {
+        public List<Appointment> Appointments { get; set; }
     }
 }

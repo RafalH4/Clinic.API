@@ -8,5 +8,6 @@ namespace Clinic.API.Models
     public class Doctor : User
     {
         public List<Contract> Contracts { get; set; }
+        public List<Appointment> Appointments { get; set; }
     }
 }
