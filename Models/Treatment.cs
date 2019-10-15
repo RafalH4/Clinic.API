@@ -7,6 +7,7 @@ namespace Clinic.API.Models
 {
     public class Treatment
     {
+        public Guid Id { get; set; }
         public List<Referral> Referrals { get; set; }
     }
 }
