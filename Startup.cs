@@ -5,7 +5,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
-
+using Clinic.API.IRepositories;
+using Clinic.API.Repositories;
+using Clinic.API.IServices;
+using Clinic.API.Services;
 
 namespace Clinic.API
 {
@@ -25,6 +28,8 @@ namespace Clinic.API
             services.AddDbContext<DataContext>(opt =>
                opt.UseSqlServer(dbConnection));
             services.AddControllers();
+            services.AddScoped<IDoctorRepository, DoctorRepository>();
+            services.AddScoped<IDoctorService, DoctorService>();
 
         }
 
