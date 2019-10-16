@@ -16,12 +16,40 @@ namespace Clinic.API.Repositories
             _context = context;
         }
 
-        public async Task<Doctor> Get(Guid id)
+        public async Task AddDoctor(Doctor doctor)
         {
-            Doctor doctor = new Doctor();
-            doctor = _context.Doctors.SingleOrDefault(x => x.Id == id);
-            return await Task.FromResult(doctor);
+            _context.Doctors.Add(doctor);
+            await Task.CompletedTask;  
         }
 
+        public async Task DeleteDoctor(Doctor doctor)
+        {
+            _context.Doctors.Remove(doctor);
+            await Task.CompletedTask;
+        }
+
+        public async Task<Doctor> GetById(Guid id)
+        {
+            return await Task.FromResult(_context.Doctors.SingleOrDefault(
+                doctor => doctor.Id == id));
+        }
+
+        public async Task<Doctor> GetByEmail(string email)
+        {
+            return await Task.FromResult(_context.Doctors.SingleOrDefault(
+                doctor => doctor.Email == email));
+        }
+
+        public async Task<Doctor> GetByPesel(string pesel)
+        {
+            return await Task.FromResult(_context.Doctors.SingleOrDefault(
+                doctor => doctor.Pesel == pesel));
+        }
+
+        public async Task UpdateDoctor(Doctor doctor)
+        {
+            _context.Doctors.Update(doctor);
+            await Task.CompletedTask;
+        }
     }
 }
