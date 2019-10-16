@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Clinic.API.IRepositories
 {
-    interface ITreatment
+    interface ITreatmentRepository
     {
     }
 }

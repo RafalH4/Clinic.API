@@ -29,7 +29,6 @@ namespace Clinic.API
                opt.UseSqlServer(dbConnection));
             services.AddControllers();
             services.AddScoped<IDoctorRepository, DoctorRepository>();
-            services.AddScoped<IDoctorService, DoctorService>();
 
         }
 
