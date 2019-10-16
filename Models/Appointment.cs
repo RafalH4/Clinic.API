@@ -16,10 +16,6 @@ namespace Clinic.API.Models
         public Patient Patient { get; set; }
         public Doctor Doctor { get; set; }
 
-        public Appointment()
-        {
-            Anamnesis = "aaa";
-        }
 
 
     }

@@ -9,6 +9,10 @@ namespace Clinic.API.Data
 {
     public class DataContext : DbContext
     {
+        public DataContext(DbContextOptions<DataContext> options)
+            : base(options)
+        {
+        }
         public DbSet<Root> Departments { get; set; }
         public DbSet<Nurse> Nurses { get; set; }
         public DbSet<Patient> Patients { get; set; }
@@ -23,8 +27,6 @@ namespace Clinic.API.Data
         public DbSet<Prescription> Prescriptions { get; set; }
         public DbSet<Drug> Drugs { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder options)
-            => options.UseSqlite("Data Source=Clinic.db");
 
     }
 }
