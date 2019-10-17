@@ -7,6 +7,27 @@ namespace Clinic.API.Models
 {
     public abstract class User
     {
+        protected User(Guid id, string email, string password, 
+            string role, DateTime createdAt, string firstName, 
+            string secondName, string pesel, string phoneNumber, 
+            string postCode, string city, string street, 
+            string houseNumber)
+        {
+            Id = id;
+            Email = email;
+            Password = password;
+            Role = role;
+            CreatedAt = createdAt;
+            FirstName = firstName;
+            SecondName = secondName;
+            Pesel = pesel;
+            PhoneNumber = phoneNumber;
+            PostCode = postCode;
+            City = city;
+            Street = street;
+            HouseNumber = houseNumber;
+        }
+
         public Guid Id { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }

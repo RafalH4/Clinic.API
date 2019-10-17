@@ -19,7 +19,7 @@
     "Clinic.API": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "weatherforecast",
+      "launchUrl": "doctor",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },

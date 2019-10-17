@@ -31,8 +31,10 @@ namespace Clinic.API.Services
             {
                 throw new Exception("This pesel is existed in db");
             }
-            //STWORZYĆ KONSTRUKTOR DOKTORA
-            doctor = new Doctor();
+
+            doctor = new Doctor(new Guid(), email, password, "doctor", 
+                DateTime.UtcNow, firstName, secondName, pesel, phoneNumber,
+                postCode, city, street, houseNumber);
 
             await _doctorRepository.AddDoctor(doctor);
         }

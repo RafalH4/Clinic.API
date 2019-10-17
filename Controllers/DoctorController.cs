@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Clinic.API.DTOs;
 using Clinic.API.IRepositories;
 using Clinic.API.IServices;
 using Clinic.API.Models;
@@ -29,9 +30,8 @@ namespace Clinic.API.Controllers
             return Json(null);
         }
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] Doctor doctor)
+        public async Task<IActionResult> Post([FromBody] DoctorDto doctor)
         {
-            doctor.Id = Guid.NewGuid();
             await _doctorService.AddDoctor(doctor.Email, doctor.Password, doctor.Pesel,
                 doctor.FirstName, doctor.SecondName, doctor.PhoneNumber, doctor.PostCode,
                 doctor.City, doctor.Street, doctor.HouseNumber);
