@@ -30,6 +30,8 @@ namespace Clinic.API
             services.AddControllers();
             services.AddScoped<IDoctorRepository, DoctorRepository>();
 
+            services.AddScoped<IDoctorService, DoctorService>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
