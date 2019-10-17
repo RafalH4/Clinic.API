@@ -8,6 +8,7 @@ namespace Clinic.API.IRepositories
 {
     public interface IDoctorRepository
     {
+        Task<IEnumerable<Doctor>> Get();
         Task<Doctor> GetById(Guid id);
         Task<Doctor> GetByEmail(string email);
         Task<Doctor> GetByPesel(string pesel);

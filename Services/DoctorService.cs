@@ -39,26 +39,46 @@ namespace Clinic.API.Services
             await _doctorRepository.AddDoctor(doctor);
         }
 
-        public Task DeleteDoctor(Guid id)
+        public async Task DeleteDoctor(Guid id)
+        {
+            var doctor = await _doctorRepository.GetById(id); 
+            if(doctor == null)
+            {
+                throw new Exception("Db doesn't contain this doctor");
+            }
+            await _doctorRepository.DeleteDoctor(doctor);
+        }
+
+        public async Task<IEnumerable<Doctor>> GetAll()
+        {
+            var doctors = await _doctorRepository.Get();
+            return doctors;
+        }
+
+        public async Task<Doctor> GetByEmail(string email)
+        {
+            var doctor = await _doctorRepository.GetByEmail(email);
+            if(doctor == null)
+            {
+                throw new Exception("Db doesn't contain this doctor");
+            }
+            return doctor;
+        }
+
+        public async Task<Doctor> GetById(Guid id)
+        {
+            var doctor = await _doctorRepository.GetById(id);
+            if (doctor == null)
+            {
+                throw new Exception("Db doesn't contain this doctor");
+            }
+            return doctor;
+        }
+
+        public Task<Doctor> GetByPesel(string pesel)
         {
             throw new NotImplementedException();
         }
-
-        public Task<IEnumerable<Doctor>> GetAll()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<Doctor> GetByEmail(string email)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<Doctor> GetById(Guid id)
-        {
-            throw new NotImplementedException();
-        }
-
         public Task<IEnumerable<Doctor>> GetByMedArea(Guid id)
         {
             throw new NotImplementedException();
@@ -74,12 +94,9 @@ namespace Clinic.API.Services
             throw new NotImplementedException();
         }
 
-        public Task<Doctor> GetByPesel(string pesel)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task UpdateDoctor(Guid id, string email, string password, string firstName, string secondName, string phoneNumber, string postCode, string city, string street, string houseNumber)
+        public Task UpdateDoctor(Guid id, string email, string password, 
+            string firstName, string secondName, string phoneNumber, 
+            string postCode, string city, string street, string houseNumber)
         {
             throw new NotImplementedException();
         }

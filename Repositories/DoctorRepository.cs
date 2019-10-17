@@ -52,5 +52,11 @@ namespace Clinic.API.Repositories
             _context.Doctors.Update(doctor);
             await Task.CompletedTask;
         }
+
+        public async Task<IEnumerable<Doctor>> Get()
+        {
+            var doctors = _context.Doctors.ToList();
+            return await Task.FromResult(doctors);
+        }
     }
 }

@@ -24,11 +24,12 @@ namespace Clinic.API.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Get()
+        public async Task<ActionResult<IEnumerable<DoctorDto>>> Get()
         {
-
-            return Json(null);
+            var doctors = await _doctorService.GetAll();
+            return Json(doctors);
         }
+
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] DoctorDto doctor)
         {
