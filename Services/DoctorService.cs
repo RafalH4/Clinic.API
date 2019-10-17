@@ -75,30 +75,32 @@ namespace Clinic.API.Services
             return doctor;
         }
 
-        public Task<Doctor> GetByPesel(string pesel)
+        public async Task<Doctor> GetByPesel(string pesel)
         {
-            throw new NotImplementedException();
-        }
-        public Task<IEnumerable<Doctor>> GetByMedArea(Guid id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<IEnumerable<Doctor>> GetByMedOffice(Guid id)
-        {
-            throw new NotImplementedException();
+            var doctor = await _doctorRepository.GetByPesel(pesel);
+            if (doctor == null)
+            {
+                throw new Exception("Db doesn't contain this doctor");
+            }
+            return doctor;
         }
 
-        public Task<IEnumerable<Doctor>> GetByPatient(Guid pesel)
-        {
-            throw new NotImplementedException();
-        }
 
-        public Task UpdateDoctor(Guid id, string email, string password, 
-            string firstName, string secondName, string phoneNumber, 
-            string postCode, string city, string street, string houseNumber)
+        public async Task UpdateDoctor(Guid id, string street, string postCode, 
+            string phoneNumber, string city)
         {
-            throw new NotImplementedException();
+            var doctor = await _doctorRepository.GetById(id);
+            if (doctor == null)
+            {
+                throw new Exception("Db doesn't contain this doctor");
+            }
+
+            doctor.Street = street;
+            doctor.PostCode = postCode;
+            doctor.PhoneNumber = phoneNumber;
+            doctor.City = city;
+
+            await _doctorRepository.UpdateDoctor(doctor);
         }
     }
 }

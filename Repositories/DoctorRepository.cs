@@ -26,9 +26,15 @@ namespace Clinic.API.Repositories
         public async Task DeleteDoctor(Doctor doctor)
         {
             _context.Doctors.Remove(doctor);
+            _context.SaveChanges();
             await Task.CompletedTask;
         }
 
+        public async Task<IEnumerable<Doctor>> Get()
+        {
+            var doctors = _context.Doctors.ToList();
+            return await Task.FromResult(doctors);
+        }
         public async Task<Doctor> GetById(Guid id)
         {
             return await Task.FromResult(_context.Doctors.SingleOrDefault(
@@ -50,13 +56,9 @@ namespace Clinic.API.Repositories
         public async Task UpdateDoctor(Doctor doctor)
         {
             _context.Doctors.Update(doctor);
+            _context.SaveChanges();
             await Task.CompletedTask;
         }
 
-        public async Task<IEnumerable<Doctor>> Get()
-        {
-            var doctors = _context.Doctors.ToList();
-            return await Task.FromResult(doctors);
-        }
     }
 }
