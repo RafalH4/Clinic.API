@@ -23,6 +23,7 @@ namespace Clinic.API.Controllers
             _doctorService = doctorService;
         }
 
+        #region GET
         [HttpGet]
         public async Task<ActionResult<IEnumerable<DoctorDto>>> Get()
         {
@@ -47,6 +48,7 @@ namespace Clinic.API.Controllers
             var doctor = await _doctorService.GetByPesel(pesel);
             return Json(doctor);
         }
+        #endregion
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] DoctorDto doctor)
         {

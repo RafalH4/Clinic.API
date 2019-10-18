@@ -15,6 +15,7 @@ namespace Clinic.API.Models
                   firstName, secondName, pesel, phoneNumber, 
                   postCode, city, street, houseNumber) { }
 
+
         public List<Contract> Contracts { get; set; }
         public List<Appointment> Appointments { get; set; }
     }

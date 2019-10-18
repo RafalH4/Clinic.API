@@ -1,10 +1,12 @@
 ﻿using Clinic.API.IRepositories;
 using Clinic.API.IServices;
 using Clinic.API.Models;
+using Clinic.API.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+
 
 namespace Clinic.API.Services
 {
@@ -22,15 +24,10 @@ namespace Clinic.API.Services
             string street, string houseNumber)
         {
             var doctor = await _doctorRepository.GetByEmail(email);
-            if(doctor != null)
-            {
-                throw new Exception("This email is existed in db");
-            }
+            doctor.ifDoctorExists("This email is existed in db");
+            
             doctor = await _doctorRepository.GetByPesel(pesel);
-            if(doctor != null)
-            {
-                throw new Exception("This pesel is existed in db");
-            }
+            doctor.ifDoctorExists("This pesel is existed in db");
 
             doctor = new Doctor(new Guid(), email, password, "doctor", 
                 DateTime.UtcNow, firstName, secondName, pesel, phoneNumber,
@@ -41,59 +38,41 @@ namespace Clinic.API.Services
 
         public async Task DeleteDoctor(Guid id)
         {
-            var doctor = await _doctorRepository.GetById(id); 
-            if(doctor == null)
-            {
-                throw new Exception("Db doesn't contain this doctor");
-            }
+            var doctor = await _doctorRepository.GetById(id);
+            doctor.ifDoctorNotExists("Db doesn't contain this doctor");
+
             await _doctorRepository.DeleteDoctor(doctor);
         }
 
         public async Task<IEnumerable<Doctor>> GetAll()
-        {
-            var doctors = await _doctorRepository.Get();
-            return doctors;
-        }
-
+            =>  await _doctorRepository.Get();
+        
         public async Task<Doctor> GetByEmail(string email)
         {
             var doctor = await _doctorRepository.GetByEmail(email);
-            if(doctor == null)
-            {
-                throw new Exception("Db doesn't contain this doctor");
-            }
+            doctor.ifDoctorNotExists("Db doesn't contain this doctor");
             return doctor;
         }
 
         public async Task<Doctor> GetById(Guid id)
         {
             var doctor = await _doctorRepository.GetById(id);
-            if (doctor == null)
-            {
-                throw new Exception("Db doesn't contain this doctor");
-            }
+            doctor.ifDoctorNotExists("Db doesn't contain this doctor");
             return doctor;
         }
 
         public async Task<Doctor> GetByPesel(string pesel)
         {
             var doctor = await _doctorRepository.GetByPesel(pesel);
-            if (doctor == null)
-            {
-                throw new Exception("Db doesn't contain this doctor");
-            }
+            doctor.ifDoctorNotExists("Db doesn't contain this doctor");
             return doctor;
         }
-
 
         public async Task UpdateDoctor(Guid id, string street, string postCode, 
             string phoneNumber, string city)
         {
             var doctor = await _doctorRepository.GetById(id);
-            if (doctor == null)
-            {
-                throw new Exception("Db doesn't contain this doctor");
-            }
+            doctor.ifDoctorNotExists("Db doesn't contain this doctor");
 
             doctor.Street = street;
             doctor.PostCode = postCode;
