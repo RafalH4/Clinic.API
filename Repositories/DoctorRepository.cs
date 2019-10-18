@@ -20,7 +20,7 @@ namespace Clinic.API.Repositories
         {
             await _context.Doctors.AddAsync(doctor);
             await _context.SaveChangesAsync();
-            //await Task.CompletedTask;  
+            await Task.CompletedTask;  
         }
 
         public async Task DeleteDoctor(Doctor doctor)
@@ -36,22 +36,19 @@ namespace Clinic.API.Repositories
             return await Task.FromResult(doctors);
         }
         public async Task<Doctor> GetById(Guid id)
-        {
-            return await Task.FromResult(_context.Doctors.SingleOrDefault(
+            => await Task.FromResult(_context.Doctors.SingleOrDefault(
                 doctor => doctor.Id == id));
-        }
+        
 
         public async Task<Doctor> GetByEmail(string email)
-        {
-            return await Task.FromResult(_context.Doctors.SingleOrDefault(
+            => await Task.FromResult(_context.Doctors.SingleOrDefault(
                 doctor => doctor.Email == email));
-        }
+        
 
         public async Task<Doctor> GetByPesel(string pesel)
-        {
-            return await Task.FromResult(_context.Doctors.SingleOrDefault(
+            => await Task.FromResult(_context.Doctors.SingleOrDefault(
                 doctor => doctor.Pesel == pesel));
-        }
+        
 
         public async Task UpdateDoctor(Doctor doctor)
         {
