@@ -17,6 +17,7 @@ namespace Clinic.API.Data
         public DbSet<Nurse> Nurses { get; set; }
         public DbSet<Patient> Patients { get; set; }
         public DbSet<Doctor> Doctors { get; set; }
+        public DbSet<Root> Roots { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Contract> Contracts { get; set; }
         public DbSet<MedArea> MedAreas { get; set; }
