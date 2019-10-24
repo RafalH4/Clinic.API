@@ -18,7 +18,7 @@ namespace Clinic.API.Repositories
 
         public async Task AddDoctor(Doctor doctor)
         {
-            await _context.Doctors.AddAsync(doctor);
+            await _context.Users.AddAsync(doctor);
             await _context.SaveChangesAsync();
             await Task.CompletedTask;  
         }

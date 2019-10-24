@@ -6,19 +6,19 @@ using System.Threading.Tasks;
 
 namespace Clinic.API.Extensions
 {
-    public static class DoctorExtensionMethods
+    public static class UserExtensionmMethods
     {
-        public static void ifDoctorExists(this Doctor doctor, string text)
+        public static void ifUserExists(this User user, string text)
         {
-            if (doctor != null)
+            if (user != null)
             {
                 throw new Exception(text);
             }
         }
 
-        public static void ifDoctorNotExists(this Doctor doctor, string text)
+        public static void ifUserNotExists(this User user, string text)
         {
-            if (doctor == null)
+            if (user == null)
             {
                 throw new Exception(text);
             }
