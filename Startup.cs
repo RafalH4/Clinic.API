@@ -31,6 +31,7 @@ namespace Clinic.API
             services.AddScoped<IDoctorRepository, DoctorRepository>();
 
             services.AddScoped<IDoctorService, DoctorService>();
+            services.AddCors();
 
         }
 
@@ -42,6 +43,7 @@ namespace Clinic.API
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseCors(x => x.WithOrigins("http://localhost:4200").AllowAnyMethod().AllowAnyHeader());
             app.UseHttpsRedirection();
 
             app.UseRouting();
