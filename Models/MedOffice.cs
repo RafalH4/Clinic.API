@@ -9,6 +9,7 @@ namespace Clinic.API.Models
     {
         public Guid Id { get; set; }
         public List<Appointment> Appointments { get; set; }
+        public Department department { get; set; }
         public int OfficeNumber { get; set; }
         public string Description { get; set; }
 

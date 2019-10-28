@@ -4,14 +4,16 @@ using Clinic.API.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Clinic.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20191025013235_DepartmentFix")]
+    partial class DepartmentFix
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -140,18 +142,18 @@ namespace Clinic.API.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid?>("DepartmentId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("OfficeNumber")
                         .HasColumnType("int");
 
-                    b.Property<Guid?>("departmentId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("departmentId");
+                    b.HasIndex("DepartmentId");
 
                     b.ToTable("MedOffices");
                 });
@@ -328,9 +330,9 @@ namespace Clinic.API.Migrations
 
             modelBuilder.Entity("Clinic.API.Models.MedOffice", b =>
                 {
-                    b.HasOne("Clinic.API.Models.Department", "department")
+                    b.HasOne("Clinic.API.Models.Department", null)
                         .WithMany("MedOffices")
-                        .HasForeignKey("departmentId");
+                        .HasForeignKey("DepartmentId");
                 });
 
             modelBuilder.Entity("Clinic.API.Models.Prescription", b =>
