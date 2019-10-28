@@ -12,55 +12,60 @@ namespace Clinic.API.Services
     public class NurseService : INurseService
     {
         private readonly INurseRepository _nurseRepository;
-        public NurseService(INurseRepository nurseRepository)
+        private readonly IUserRepository _userRepository;
+        public NurseService(INurseRepository nurseRepository, IUserRepository userRepository)
         {
             _nurseRepository = nurseRepository;
+            _userRepository = userRepository;
         }
         public async Task AddNurse(string email, string password, string pesel, 
             string firstName, string secondName, string phoneNumber, 
             string postCode, string city, string street, string houseNumber)
         {
-            var nurse = await _nurseRepository.GetByEmail(email);
-            nurse.ifUserExists("This email is existed in db");
+            var user = await _nurseRepository.GetByEmail(email);
+            user.ifUserExists("This email is existed in db");
 
-            nurse = await _nurseRepository.GetByPesel(pesel);
-            nurse.ifUserExists("This pesel is existed in db");
+            user = await _nurseRepository.GetByPesel(pesel);
+            user.ifUserExists("This pesel is existed in db");
 
-            nurse = new Nurse(new Guid(), email, password, "nurse",
+           var nurse = new Nurse(new Guid(), email, password, "nurse",
                 DateTime.UtcNow, firstName, secondName, pesel, phoneNumber,
                 postCode, city, street, houseNumber);
 
             await _nurseRepository.AddNurse(nurse);
         }
 
-        public Task DeleteNurse(Guid id)
+        public async Task DeleteNurse(Guid id)
         {
-            throw new NotImplementedException();
+            var nurse = await _nurseRepository.GetById(id);
+            nurse.ifUserNotExists("Db doesn't contain this doctor");
+
+            await _nurseRepository.DeleteNurse(nurse);
         }
 
-        public Task<IEnumerable<Nurse>> GetAll()
-        {
-            throw new NotImplementedException();
-        }
+        public async Task<IEnumerable<Nurse>> GetAll()
+            => await _nurseRepository.Get();
 
-        public Task<Nurse> GetByEmail(string email)
-        {
-            throw new NotImplementedException();
-        }
+        public async Task<Nurse> GetByEmail(string email)
+            => await _nurseRepository.GetByEmail(email);
 
-        public Task<Nurse> GetById(Guid id)
-        {
-            throw new NotImplementedException();
-        }
+        public async Task<Nurse> GetById(Guid id)
+            => await _nurseRepository.GetById(id);
 
-        public Task<Nurse> GetByPesel(string pesel)
-        {
-            throw new NotImplementedException();
-        }
+        public async Task<Nurse> GetByPesel(string pesel)
+            => await _nurseRepository.GetByPesel(pesel);
 
-        public Task UpdateNurse(Guid id, string street, string postCode, string phoneNumber, string city)
+        public async Task UpdateNurse(Guid id, string street, string postCode, string phoneNumber, string city)
         {
-            throw new NotImplementedException();
+            var nurse = await _nurseRepository.GetById(id);
+            nurse.ifUserNotExists("Db doesn't contain this doctor");
+
+            nurse.Street = street;
+            nurse.PostCode = postCode;
+            nurse.PhoneNumber = phoneNumber;
+            nurse.City = city;
+
+            await _nurseRepository.UpdateNurse(nurse);
         }
     }
 }

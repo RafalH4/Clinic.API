@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Clinic.API.IRepositories
 {
-    interface IPatientRepository
+    public interface IPatientRepository
     {
         Task<IEnumerable<Patient>> Get();
         Task<Patient> GetById(Guid id);

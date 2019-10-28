@@ -13,9 +13,12 @@ namespace Clinic.API.Services
     public class DoctorService : IDoctorService
     {
         private readonly IDoctorRepository _doctorRepository;
-        public DoctorService(IDoctorRepository doctorRepository)
+        private readonly IUserRepository _userRepository;
+        public DoctorService(IDoctorRepository doctorRepository, IUserRepository userRepository)
         {
             _doctorRepository = doctorRepository;
+            _userRepository = userRepository;
+
         }
 
         public async Task AddDoctor(string email, string password, 
@@ -23,13 +26,13 @@ namespace Clinic.API.Services
             string phoneNumber, string postCode, string city, 
             string street, string houseNumber)
         {
-            var doctor = await _doctorRepository.GetByEmail(email);
-            doctor.ifUserExists("This email is existed in db");
-            
-            doctor = await _doctorRepository.GetByPesel(pesel);
-            doctor.ifUserExists("This pesel is existed in db");
+            var user = await _userRepository.GetByEmail(email);
+            user.ifUserExists("This email is existed in db");
 
-            doctor = new Doctor(new Guid(), email, password, "doctor", 
+            user = await _userRepository.GetByPesel(pesel);
+            user.ifUserExists("This pesel is existed in db");
+
+            var doctor = new Doctor(new Guid(), email, password, "doctor", 
                 DateTime.UtcNow, firstName, secondName, pesel, phoneNumber,
                 postCode, city, street, houseNumber);
 
