@@ -1,4 +1,5 @@
-﻿using Clinic.API.IRepositories;
+﻿using Clinic.API.Extensions;
+using Clinic.API.IRepositories;
 using Clinic.API.IServices;
 using Clinic.API.Models;
 using System;
@@ -17,41 +18,54 @@ namespace Clinic.API.Services
             _rootRepository = rootRepository;
             _userRepository = userRepository;
         }
-        public Task AddRoot(string email, string password, string pesel, 
+        public async Task AddRoot(string email, string password, string pesel, 
             string firstName, string secondName, string phoneNumber, 
             string postCode, string city, string street, string houseNumber)
         {
-            throw new NotImplementedException();
+            var user = await _rootRepository.GetByEmail(email);
+            user.ifUserExists("This email is existed in db");
+
+            user = await _rootRepository.GetByPesel(pesel);
+            user.ifUserExists("This pesel is existed in db");
+
+            var root = new Root(new Guid(), email, password, "root",
+                 DateTime.UtcNow, firstName, secondName, pesel, phoneNumber,
+                 postCode, city, street, houseNumber);
+
+            await _rootRepository.AddRoot(root);
         }
 
-        public Task DeleteRoot(Guid id)
+        public async Task DeleteRoot(Guid id)
         {
-            throw new NotImplementedException();
+            var root = await _rootRepository.GetById(id);
+            root.ifUserNotExists("Db doesn't contain this doctor");
+
+            await _rootRepository.DeleteRoot(root);
         }
 
-        public Task<IEnumerable<Root>> GetAll()
-        {
-            throw new NotImplementedException();
-        }
+        public async Task<IEnumerable<Root>> GetAll()
+            => await _rootRepository.Get();
 
-        public Task<Root> GetByEmail(string email)
-        {
-            throw new NotImplementedException();
-        }
+        public async Task<Root> GetByEmail(string email)
+            => await _rootRepository.GetByEmail(email);
 
-        public Task<Root> GetById(Guid id)
-        {
-            throw new NotImplementedException();
-        }
+        public async Task<Root> GetById(Guid id)
+            => await _rootRepository.GetById(id);
 
-        public Task<Root> GetByPesel(string pesel)
-        {
-            throw new NotImplementedException();
-        }
+        public async Task<Root> GetByPesel(string pesel)
+            => await _rootRepository.GetByPesel(pesel);
 
-        public Task UpdateRoot(Guid id, string street, string postCode, string phoneNumber, string city)
+        public async Task UpdateRoot(Guid id, string street, string postCode, string phoneNumber, string city)
         {
-            throw new NotImplementedException();
+            var root = await _rootRepository.GetById(id);
+            root.ifUserNotExists("Db doesn't contain this doctor");
+
+            root.Street = street;
+            root.PostCode = postCode;
+            root.PhoneNumber = phoneNumber;
+            root.City = city;
+
+            await _rootRepository.UpdateRoot(root);
         }
     }
 }
