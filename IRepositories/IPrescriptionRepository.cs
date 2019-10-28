@@ -1,11 +1,19 @@
-﻿using System;
+﻿using Clinic.API.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace Clinic.API.IRepositories
 {
-    interface IPrescriptionRepository
+    public interface IPrescriptionRepository
     {
+        Task<IEnumerable<Prescription>> Get();
+        Task<IEnumerable<Prescription>> GetByAppointment(Appointment appointment);
+        Task<IEnumerable<Prescription>> GetByDate(DateTime date);
+        Task<Prescription> GetById(Guid id);
+        Task AddPrescription(Prescription prescription);
+        Task DeletePrescription(Prescription prescription);
+        Task UpdatePrescription(Prescription prescription);
     }
 }
