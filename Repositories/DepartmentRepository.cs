@@ -15,8 +15,10 @@ namespace Clinic.API.Repositories
         {
             _context = context;
         }
+        public async Task<IEnumerable<Department>> Get()
+            => await Task.FromResult(_context.Departments.ToList());
 
-        public async Task<Department> Get(Guid id)
+        public async Task<Department> GetById(Guid id)
             => await Task.FromResult(_context.Departments
                 .SingleOrDefault(department => department.Id == id));
 
@@ -46,5 +48,7 @@ namespace Clinic.API.Repositories
             await _context.SaveChangesAsync();
             await Task.CompletedTask;
         }
+
+
     }
 }

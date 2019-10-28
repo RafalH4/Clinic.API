@@ -8,7 +8,8 @@ namespace Clinic.API.IRepositories
 {
     public interface IDepartmentRepository
     {
-        Task<Department> Get(Guid id);
+        Task <IEnumerable<Department>> Get();
+        Task<Department> GetById(Guid id);
         Task<Department> GetByName(string name);
         Task<Department> GetByMedOffice(MedOffice medOffice);
         Task AddDepartment(Department department);
