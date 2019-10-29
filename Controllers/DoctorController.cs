@@ -23,32 +23,34 @@ namespace Clinic.API.Controllers
             _doctorService = doctorService;
         }
 
-        #region GET
         [HttpGet]
         public async Task<ActionResult<IEnumerable<DoctorDto>>> Get()
         {
             var doctors = await _doctorService.GetAll();
             return Json(doctors);
         }
+        
         [HttpGet("/id/{id}")]
         public async Task<IActionResult> Get(Guid id)
         {
             var doctor = await _doctorService.GetById(id);
             return Json(doctor);
         }
+        
         [HttpGet("email/{email}")]
         public async Task<IActionResult> Get(string email)
         {
             var doctor = await _doctorService.GetByEmail(email);
             return Json(doctor);
         }
+        
         [HttpGet("pesel/{pesel}")]
         public async Task<IActionResult> GetByPesel(string pesel)
         {
             var doctor = await _doctorService.GetByPesel(pesel);
             return Json(doctor);
         }
-        #endregion
+        
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] DoctorDto doctor)
         {
@@ -57,16 +59,16 @@ namespace Clinic.API.Controllers
                 doctor.City, doctor.Street, doctor.HouseNumber);
             return Created("/doctors/5", null);
         }
-        
+       
         [HttpDelete("{doctorId}")]
-        public async Task<IActionResult> Delete (Guid doctorId)
+        public async Task<IActionResult> DeleteDoctor (Guid doctorId)
         {
             await _doctorService.DeleteDoctor(doctorId);
             return NoContent();
         }
-
+        
         [HttpPut("{doctorId}")]
-        public async Task<IActionResult> Put(Guid doctorId, [FromBody] DoctorDto doctor)
+        public async Task<IActionResult> UpdateDoctor(Guid doctorId, [FromBody]DoctorDto doctor)
         {
             await _doctorService.UpdateDoctor(doctorId, doctor.Street, doctor.PostCode, 
                 doctor.PhoneNumber, doctor.City);

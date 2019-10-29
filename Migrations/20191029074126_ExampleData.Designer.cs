@@ -4,14 +4,16 @@ using Clinic.API.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Clinic.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20191029074126_ExampleData")]
+    partial class ExampleData
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -277,25 +279,9 @@ namespace Clinic.API.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("f1de2bec-cc76-443f-94f4-e45d58f870d8"),
+                            Id = new Guid("977246bb-ab8b-4b4b-81da-9189e661be8c"),
                             City = "",
-                            CreatedAt = new DateTime(2019, 10, 29, 7, 49, 48, 586, DateTimeKind.Utc).AddTicks(902),
-                            Email = "user1@o2.pl",
-                            FirstName = "Jan",
-                            HouseNumber = "",
-                            Password = "pass",
-                            Pesel = "",
-                            PhoneNumber = "",
-                            PostCode = "",
-                            Role = "doctor",
-                            SecondName = "",
-                            Street = ""
-                        },
-                        new
-                        {
-                            Id = new Guid("91ca47da-38d1-40e8-852d-b70d13d1abc3"),
-                            City = "",
-                            CreatedAt = new DateTime(2019, 10, 29, 7, 49, 48, 586, DateTimeKind.Utc).AddTicks(9665),
+                            CreatedAt = new DateTime(2019, 10, 29, 7, 41, 25, 674, DateTimeKind.Utc).AddTicks(3888),
                             Email = "user1@o2.pl",
                             FirstName = "Jan",
                             HouseNumber = "",
@@ -309,9 +295,9 @@ namespace Clinic.API.Migrations
                         },
                         new
                         {
-                            Id = new Guid("d259f930-0f3b-49f9-b050-499a8271127d"),
+                            Id = new Guid("12da7e78-a1e5-49dc-8f0d-66a47cb4f93d"),
                             City = "",
-                            CreatedAt = new DateTime(2019, 10, 29, 7, 49, 48, 586, DateTimeKind.Utc).AddTicks(9791),
+                            CreatedAt = new DateTime(2019, 10, 29, 7, 41, 25, 675, DateTimeKind.Utc).AddTicks(2636),
                             Email = "user2@o2.pl",
                             FirstName = "Piotr",
                             HouseNumber = "",
@@ -325,9 +311,9 @@ namespace Clinic.API.Migrations
                         },
                         new
                         {
-                            Id = new Guid("c9f61e9b-1c9c-482d-b759-c0682526b2ad"),
+                            Id = new Guid("bb24cfa0-2fcc-4910-a091-661eb1fadda4"),
                             City = "",
-                            CreatedAt = new DateTime(2019, 10, 29, 7, 49, 48, 586, DateTimeKind.Utc).AddTicks(9796),
+                            CreatedAt = new DateTime(2019, 10, 29, 7, 41, 25, 675, DateTimeKind.Utc).AddTicks(2772),
                             Email = "user3@o2.pl",
                             FirstName = "Paweł",
                             HouseNumber = "",
@@ -341,9 +327,9 @@ namespace Clinic.API.Migrations
                         },
                         new
                         {
-                            Id = new Guid("bf2878a5-cc9f-4695-adfc-3a8120bb7b53"),
+                            Id = new Guid("ff7206ff-a04f-414a-91d0-2f7bcfa95812"),
                             City = "",
-                            CreatedAt = new DateTime(2019, 10, 29, 7, 49, 48, 586, DateTimeKind.Utc).AddTicks(9798),
+                            CreatedAt = new DateTime(2019, 10, 29, 7, 41, 25, 675, DateTimeKind.Utc).AddTicks(2777),
                             Email = "user4@o2.pl",
                             FirstName = "Andrzej",
                             HouseNumber = "",

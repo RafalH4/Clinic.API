@@ -23,6 +23,8 @@ namespace Clinic.API.Repositories
                 .Where(contract => contract.Department.Equals(department)).ToList());
 
 
+
+
         public async Task<IEnumerable<Contract>> GetByDoctor(Doctor doctor)
             => await Task.FromResult(_context.Contracts
                 .Where(contract => contract.Doctor.Equals(doctor)).ToList());

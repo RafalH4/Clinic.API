@@ -28,6 +28,17 @@ namespace Clinic.API.Data
         public DbSet<Prescription> Prescriptions { get; set; }
         public DbSet<Drug> Drugs { get; set; }
 
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            builder.Entity<Doctor>().HasData(
+                new Doctor(Guid.NewGuid(), "user1@o2.pl", "pass", "doctor", DateTime.UtcNow, "Jan", "", "", "", "", "", "", ""),
+                new Doctor(Guid.NewGuid(), "user1@o2.pl", "pass", "doctor", DateTime.UtcNow, "Jan", "Kowalski", "", "", "", "", "", ""),
+                new Doctor(Guid.NewGuid(), "user2@o2.pl", "pass", "doctor", DateTime.UtcNow, "Piotr", "Nowak", "", "", "", "", "", ""),
+                new Doctor(Guid.NewGuid(), "user3@o2.pl", "pass", "doctor", DateTime.UtcNow, "Paweł", "Szczery", "", "", "", "", "", ""),
+                new Doctor(Guid.NewGuid(), "user4@o2.pl", "pass", "doctor", DateTime.UtcNow, "Andrzej", "Kosień", "", "", "", "", "", "")
+              );
+        }
+
 
     }
 }

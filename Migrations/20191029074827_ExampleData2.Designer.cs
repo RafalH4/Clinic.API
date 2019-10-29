@@ -4,14 +4,16 @@ using Clinic.API.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Clinic.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20191029074827_ExampleData2")]
+    partial class ExampleData2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -277,9 +279,9 @@ namespace Clinic.API.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("f1de2bec-cc76-443f-94f4-e45d58f870d8"),
+                            Id = new Guid("cb903673-0b5c-461f-9dcc-210239c8e63e"),
                             City = "",
-                            CreatedAt = new DateTime(2019, 10, 29, 7, 49, 48, 586, DateTimeKind.Utc).AddTicks(902),
+                            CreatedAt = new DateTime(2019, 10, 29, 7, 48, 27, 149, DateTimeKind.Utc).AddTicks(3934),
                             Email = "user1@o2.pl",
                             FirstName = "Jan",
                             HouseNumber = "",
@@ -293,9 +295,9 @@ namespace Clinic.API.Migrations
                         },
                         new
                         {
-                            Id = new Guid("91ca47da-38d1-40e8-852d-b70d13d1abc3"),
+                            Id = new Guid("339f19a6-a200-4c7d-8080-0e15d83a2fc0"),
                             City = "",
-                            CreatedAt = new DateTime(2019, 10, 29, 7, 49, 48, 586, DateTimeKind.Utc).AddTicks(9665),
+                            CreatedAt = new DateTime(2019, 10, 29, 7, 48, 27, 150, DateTimeKind.Utc).AddTicks(4280),
                             Email = "user1@o2.pl",
                             FirstName = "Jan",
                             HouseNumber = "",
@@ -305,54 +307,6 @@ namespace Clinic.API.Migrations
                             PostCode = "",
                             Role = "doctor",
                             SecondName = "Kowalski",
-                            Street = ""
-                        },
-                        new
-                        {
-                            Id = new Guid("d259f930-0f3b-49f9-b050-499a8271127d"),
-                            City = "",
-                            CreatedAt = new DateTime(2019, 10, 29, 7, 49, 48, 586, DateTimeKind.Utc).AddTicks(9791),
-                            Email = "user2@o2.pl",
-                            FirstName = "Piotr",
-                            HouseNumber = "",
-                            Password = "pass",
-                            Pesel = "",
-                            PhoneNumber = "",
-                            PostCode = "",
-                            Role = "doctor",
-                            SecondName = "Nowak",
-                            Street = ""
-                        },
-                        new
-                        {
-                            Id = new Guid("c9f61e9b-1c9c-482d-b759-c0682526b2ad"),
-                            City = "",
-                            CreatedAt = new DateTime(2019, 10, 29, 7, 49, 48, 586, DateTimeKind.Utc).AddTicks(9796),
-                            Email = "user3@o2.pl",
-                            FirstName = "Paweł",
-                            HouseNumber = "",
-                            Password = "pass",
-                            Pesel = "",
-                            PhoneNumber = "",
-                            PostCode = "",
-                            Role = "doctor",
-                            SecondName = "Szczery",
-                            Street = ""
-                        },
-                        new
-                        {
-                            Id = new Guid("bf2878a5-cc9f-4695-adfc-3a8120bb7b53"),
-                            City = "",
-                            CreatedAt = new DateTime(2019, 10, 29, 7, 49, 48, 586, DateTimeKind.Utc).AddTicks(9798),
-                            Email = "user4@o2.pl",
-                            FirstName = "Andrzej",
-                            HouseNumber = "",
-                            Password = "pass",
-                            Pesel = "",
-                            PhoneNumber = "",
-                            PostCode = "",
-                            Role = "doctor",
-                            SecondName = "Kosień",
                             Street = ""
                         });
                 });

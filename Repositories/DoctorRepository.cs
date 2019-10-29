@@ -1,4 +1,5 @@
 ﻿using Clinic.API.Data;
+using Clinic.API.Extensions;
 using Clinic.API.IRepositories;
 using Clinic.API.Models;
 using System;
@@ -20,7 +21,7 @@ namespace Clinic.API.Repositories
         {
             await _context.Users.AddAsync(doctor);
             await _context.SaveChangesAsync();
-            await Task.CompletedTask;  
+            await Task.CompletedTask;
         }
 
         public async Task DeleteDoctor(Doctor doctor)
@@ -32,6 +33,7 @@ namespace Clinic.API.Repositories
 
         public async Task<IEnumerable<Doctor>> Get()
             => await Task.FromResult(_context.Doctors.ToList());
+
         public async Task<Doctor> GetById(Guid id)
             => await Task.FromResult(_context.Doctors.SingleOrDefault(
                 doctor => doctor.Id == id));
