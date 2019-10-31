@@ -7,7 +7,7 @@ namespace Clinic.API.Models
 {
     public abstract class User
     {
-        protected User(Guid id, string email, string password, 
+        protected User(Guid id, string email, 
             string role, DateTime createdAt, string firstName, 
             string secondName, string pesel, string phoneNumber, 
             string postCode, string city, string street, 
