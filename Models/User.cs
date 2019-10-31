@@ -15,7 +15,6 @@ namespace Clinic.API.Models
         {
             Id = id;
             Email = email;
-            Password = password;
             Role = role;
             CreatedAt = createdAt;
             FirstName = firstName;
@@ -30,7 +29,8 @@ namespace Clinic.API.Models
 
         public Guid Id { get; set; }
         public string Email { get; set; }
-        public string Password { get; set; }
+        public byte[] PasswordHash { get; set; }
+        public byte[] PasswordSalt { get; set; }
         public string Role { get; set; }
         public DateTime CreatedAt { get; set; }
         public string FirstName { get; set; }
