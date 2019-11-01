@@ -32,7 +32,7 @@ namespace Clinic.API.Services
             user = await _userRepository.GetByPesel(pesel);
             user.ifUserExists("This pesel is existed in db");
 
-            var doctor = new Doctor(new Guid(), email, password, "doctor", 
+            var doctor = new Doctor(new Guid(), email, "doctor", 
                 DateTime.UtcNow, firstName, secondName, pesel, phoneNumber,
                 postCode, city, street, houseNumber);
 

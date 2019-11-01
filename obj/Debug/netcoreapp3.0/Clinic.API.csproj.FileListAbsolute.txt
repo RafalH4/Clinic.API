@@ -128,4 +128,8 @@ E:\WAT\Inżynierka\Przychodnia lekarska\App\Clinic.API\bin\Debug\netcoreapp3.0\r
 E:\WAT\Inżynierka\Przychodnia lekarska\App\Clinic.API\bin\Debug\netcoreapp3.0\tr\Microsoft.CodeAnalysis.Workspaces.resources.dll
 E:\WAT\Inżynierka\Przychodnia lekarska\App\Clinic.API\bin\Debug\netcoreapp3.0\zh-Hans\Microsoft.CodeAnalysis.Workspaces.resources.dll
 E:\WAT\Inżynierka\Przychodnia lekarska\App\Clinic.API\bin\Debug\netcoreapp3.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
+E:\WAT\Inżynierka\Przychodnia lekarska\App\Clinic.API\bin\Debug\netcoreapp3.0\Microsoft.IdentityModel.Logging.dll
+E:\WAT\Inżynierka\Przychodnia lekarska\App\Clinic.API\bin\Debug\netcoreapp3.0\Microsoft.IdentityModel.Tokens.dll
 E:\WAT\Inżynierka\Przychodnia lekarska\App\Clinic.API\obj\Debug\netcoreapp3.0\Clinic.API.MvcApplicationPartsAssemblyInfo.cache
+E:\WAT\Inżynierka\Przychodnia lekarska\App\Clinic.API\bin\Debug\netcoreapp3.0\Microsoft.IdentityModel.JsonWebTokens.dll
+E:\WAT\Inżynierka\Przychodnia lekarska\App\Clinic.API\bin\Debug\netcoreapp3.0\System.IdentityModel.Tokens.Jwt.dll

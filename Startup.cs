@@ -41,6 +41,7 @@ namespace Clinic.API
             services.AddScoped<IRootRepository, RootRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
 
+            services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<IDoctorService, DoctorService>();
             services.AddScoped<INurseService, NurseService>();
             services.AddScoped<IPatientService, PatientService>();

@@ -11,19 +11,21 @@ namespace Clinic.API.Services
 {
     public class AuthService : IAuthService
     {
-        private readonly IAuthRepository _authRepository;
         private readonly IUserRepository _userRepository;
         private readonly IPatientRepository _patientRepository;
-        public AuthService(IAuthRepository authRepository, IUserRepository userRepository, 
-            IPatientRepository patientRepository)
+        public AuthService(IUserRepository userRepository, IPatientRepository patientRepository)
         {
-            _authRepository = authRepository;
             _userRepository = userRepository;
             _patientRepository = patientRepository;
         }
-        public Task Login(string userName, string password)
+        public async Task<User> Login(string userName, string password)
         {
-            throw new NotImplementedException();
+            var user = await _patientRepository.GetByEmail(userName);
+            user.ifUserNotExists("This email is existed in db");
+            if (!VerifyPasswordHash(password, user.PasswordHash, user.PasswordSalt))
+                return null;
+            return user;
+
         }
 
         public async Task Register(string email, string password, string firstName, 

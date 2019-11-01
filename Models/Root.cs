@@ -7,11 +7,11 @@ namespace Clinic.API.Models
 {
     public class Root : User
     {
-        public Root(Guid id, string email, string password, 
+        public Root(Guid id, string email, 
             string role, DateTime createdAt, string firstName, 
             string secondName, string pesel, string phoneNumber, 
             string postCode, string city, string street, string houseNumber) 
-            : base(id, email, password, role, createdAt, 
+            : base(id, email, role, createdAt, 
                   firstName, secondName, pesel, phoneNumber, 
                   postCode, city, street, houseNumber)
         {
