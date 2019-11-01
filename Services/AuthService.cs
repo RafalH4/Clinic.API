@@ -13,10 +13,13 @@ namespace Clinic.API.Services
     {
         private readonly IAuthRepository _authRepository;
         private readonly IUserRepository _userRepository;
-        public AuthService(IAuthRepository authRepository, IUserRepository userRepository)
+        private readonly IPatientRepository _patientRepository;
+        public AuthService(IAuthRepository authRepository, IUserRepository userRepository, 
+            IPatientRepository patientRepository)
         {
             _authRepository = authRepository;
             _userRepository = userRepository;
+            _patientRepository = patientRepository;
         }
         public Task Login(string userName, string password)
         {
@@ -36,8 +39,14 @@ namespace Clinic.API.Services
             var patientToCreate = new Patient(Guid.NewGuid(), email, "patient", DateTime.UtcNow,
                 firstName, secondName, pesel, phoneNumber, postCode, city, street, houseNumber);
 
-            
+            byte[] passwordHash;
+            byte[] passwordSalt;
 
+            CreatePasswordHash(password, out passwordHash, out passwordSalt);
+            patientToCreate.PasswordHash = passwordHash;
+            patientToCreate.PasswordSalt = passwordSalt;
+
+            await _patientRepository.AddPatient(patientToCreate);
         }
 
         private void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)

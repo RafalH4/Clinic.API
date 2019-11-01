@@ -9,7 +9,7 @@ namespace Clinic.API.IRepositories
     public interface IAuthRepository
     {
         Task<Patient> Register(Patient patient, string password);
-        Task<Patient> Login(string userName, string password);
+        Task<Patient> Login(string email, string password);
         Task<bool> UserExists(string userName);
     }
 }
