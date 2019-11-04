@@ -40,43 +40,51 @@ namespace Clinic.API.Controllers
         }
 
 
-        [HttpPost("login")]
-        public async Task<IActionResult> Login(UserForLoginDto userFromLoginDto)
+        //        [HttpPost("login")]
+        //        public async Task<IActionResult> Login(UserForLoginDto userFromLoginDto)
+        //        {
+        //            var user = await _authService.Login(userFromLoginDto.UserName, userFromLoginDto.Password);
+
+        //            if (user == null)
+        //                return Unauthorized();
+
+        //            var claims = new[]
+        //{
+        //                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+        //                new Claim(ClaimTypes.Name, user.Email),
+        //                new Claim(ClaimTypes.Role, user.Role)
+        //            };
+
+        //            var key = new SymmetricSecurityKey(Encoding.UTF8
+        //                .GetBytes(_config.GetSection("AppSettings:Token").Value));
+        //            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
+
+        //            var tokenDescriptor = new SecurityTokenDescriptor
+        //            {
+        //                Subject = new ClaimsIdentity(claims),
+        //                Expires = DateTime.Now.AddDays(1),
+        //                SigningCredentials = creds
+        //            };
+
+
+        //            var tokenHandler = new JwtSecurityTokenHandler();
+        //            var token = tokenHandler.CreateToken(tokenDescriptor);
+
+        //            return Ok(new
+        //            {
+        //                token = tokenHandler.WriteToken(token)
+        //            });
+        //        }
+        [HttpPost("login2")]
+        public async Task<IActionResult> Login2([FromBody]UserForLoginDto userFromLoginDto)
         {
-            var userFromRepo = await _authService.Login(userFromLoginDto.UserName, userFromLoginDto.Password);
-
-            if (userFromRepo == null)
-                return Unauthorized();
-
-            var claims = new[]
-{
-                new Claim(ClaimTypes.NameIdentifier, userFromRepo.Id.ToString()),
-                new Claim(ClaimTypes.Name, userFromRepo.Email),
-                new Claim(ClaimTypes.Role, userFromRepo.Role)
-            };
-
-            var key = new SymmetricSecurityKey(Encoding.UTF8
-                .GetBytes(_config.GetSection("AppSettings:Token").Value));
-            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
-
-            var tokenDescriptor = new SecurityTokenDescriptor
-            {
-                Subject = new ClaimsIdentity(claims),
-                Expires = DateTime.Now.AddDays(1),
-                SigningCredentials = creds
-            };
-
-
-            var tokenHandler = new JwtSecurityTokenHandler();
-            var token = tokenHandler.CreateToken(tokenDescriptor);
-
+            var token = await _authService.Login(userFromLoginDto.UserName, userFromLoginDto.Password);
             return Ok(new
             {
-                token = tokenHandler.WriteToken(token)
+                token = token
             });
-
-
         }
+
 
 
     }

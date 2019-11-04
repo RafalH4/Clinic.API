@@ -2,6 +2,7 @@
 using Clinic.API.IRepositories;
 using Clinic.API.IServices;
 using Clinic.API.Models;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,18 +14,22 @@ namespace Clinic.API.Services
     {
         private readonly IUserRepository _userRepository;
         private readonly IPatientRepository _patientRepository;
-        public AuthService(IUserRepository userRepository, IPatientRepository patientRepository)
+        private readonly IJwtHandler _jwtHandler;
+        public AuthService(IUserRepository userRepository, IPatientRepository patientRepository, IJwtHandler jwtHandler)
         {
             _userRepository = userRepository;
             _patientRepository = patientRepository;
+            _jwtHandler = jwtHandler;
         }
-        public async Task<User> Login(string userName, string password)
+        public async Task<String> Login(string userName, string password)
         {
             var user = await _patientRepository.GetByEmail(userName);
             user.ifUserNotExists("This email is existed in db");
-            if (!VerifyPasswordHash(password, user.PasswordHash, user.PasswordSalt))
+            if (!user.checkPassword(password))
                 return null;
-            return user;
+
+            var token = _jwtHandler.CreateToken(user);
+            return token;
 
         }
 
@@ -59,20 +64,5 @@ namespace Clinic.API.Services
                 passwordHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
             }
         }
-
-        private bool VerifyPasswordHash(string password, byte[] passswordHash, byte[] passwordSalt)
-        {
-            using (var hmac = new System.Security.Cryptography.HMACSHA512(passwordSalt))
-            {
-                var computedHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
-                for (int i = 0; i < computedHash.Length; i++)
-                {
-                    if (computedHash[i] != passswordHash[i])
-                        return false;
-                }
-                return true;
-            }
-        }
-
     }
 }

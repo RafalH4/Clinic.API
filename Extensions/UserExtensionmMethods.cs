@@ -23,5 +23,17 @@ namespace Clinic.API.Extensions
                 throw new Exception(text);
             }
         }
+        public static bool checkPassword(this User user, string password)
+        {
+            var hmac = new System.Security.Cryptography.HMACSHA512(user.PasswordSalt);
+            var computedHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
+            for (int i = 0; i < computedHash.Length; i++)
+            {
+                if (computedHash[i] != user.PasswordHash[i])
+                    return false;
+            }
+            return true;
+
+        }
     }
 }

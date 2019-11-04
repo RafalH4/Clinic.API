@@ -1,4 +1,5 @@
 ﻿using Clinic.API.Models;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,7 @@ namespace Clinic.API.IServices
         Task Register(string email, string password, string firstName, string secondName,
             string pesel, string phoneNumber, string postCode, string city,
             string street, string houseNumber);
-        Task<User> Login(string userName, string password);
+        Task<String> Login(string userName, string password);
 
     }
 }
