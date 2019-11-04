@@ -15,7 +15,8 @@ namespace Clinic.API.Services
         private readonly IUserRepository _userRepository;
         private readonly IPatientRepository _patientRepository;
         private readonly IJwtHandler _jwtHandler;
-        public AuthService(IUserRepository userRepository, IPatientRepository patientRepository, IJwtHandler jwtHandler)
+        public AuthService(IUserRepository userRepository, 
+            IPatientRepository patientRepository, IJwtHandler jwtHandler)
         {
             _userRepository = userRepository;
             _patientRepository = patientRepository;
@@ -46,23 +47,11 @@ namespace Clinic.API.Services
             var patientToCreate = new Patient(Guid.NewGuid(), email, "patient", DateTime.UtcNow,
                 firstName, secondName, pesel, phoneNumber, postCode, city, street, houseNumber);
 
-            byte[] passwordHash;
-            byte[] passwordSalt;
-
-            CreatePasswordHash(password, out passwordHash, out passwordSalt);
-            patientToCreate.PasswordHash = passwordHash;
-            patientToCreate.PasswordSalt = passwordSalt;
+            var hmac = new System.Security.Cryptography.HMACSHA512();
+            patientToCreate.PasswordSalt = hmac.Key;
+            patientToCreate.PasswordHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
 
             await _patientRepository.AddPatient(patientToCreate);
-        }
-
-        private void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
-        {
-            using (var hmac = new System.Security.Cryptography.HMACSHA512())
-            {
-                passwordSalt = hmac.Key;
-                passwordHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
-            }
         }
     }
 }

@@ -19,7 +19,7 @@ namespace Clinic.API.Services
         {
             _config = config;      
         }
-        public String CreateToken(User user)
+        public string CreateToken(User user)
         {
             var claims = new[]
 {
