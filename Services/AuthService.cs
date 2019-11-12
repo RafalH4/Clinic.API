@@ -22,12 +22,12 @@ namespace Clinic.API.Services
             _patientRepository = patientRepository;
             _jwtHandler = jwtHandler;
         }
-        public async Task<String> Login(string userName, string password)
+        public async Task<string> Login(string userName, string password)
         {
             var user = await _patientRepository.GetByEmail(userName);
             user.ifUserNotExists("This email is existed in db");
             if (!user.checkPassword(password))
-                return null;
+                throw new Exception("Insert correct password");
 
             var token = _jwtHandler.CreateToken(user);
             return token;
