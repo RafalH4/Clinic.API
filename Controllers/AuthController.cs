@@ -19,11 +19,14 @@ namespace Clinic.API.Controllers
     public class AuthController : Controller
     {
         private readonly IAuthService _authService;
+        private readonly IUserService _userService;
         private readonly IConfiguration _config;
 
-        public AuthController(IAuthService authService, IConfiguration config)
+        public AuthController(IAuthService authService, 
+            IConfiguration config, IUserService userService)
         {
             _authService = authService;
+            _userService = userService;
             _config = config;
         }
 
@@ -47,6 +50,12 @@ namespace Clinic.API.Controllers
             {
                 token = token
             });
+        }
+        [HttpPost]
+        public async Task<IActionResult> ValidateEmail(string email)
+        {
+            var ifExist = await _userService.IfEmailAvaiable(email);
+            return Ok(ifExist);
         }
 
 
