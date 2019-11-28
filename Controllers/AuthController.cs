@@ -45,7 +45,7 @@ namespace Clinic.API.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody]UserForLoginDto userFromLoginDto)
         {
-            var token = await _authService.Login(userFromLoginDto.UserName, userFromLoginDto.Password);
+            var token = await _authService.Login(userFromLoginDto.Email, userFromLoginDto.Password);
             return Ok(new
             {
                 token = token

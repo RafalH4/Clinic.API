@@ -10,5 +10,8 @@ namespace Clinic.API.IServices
     {
         Task<IEnumerable<Contract>> GetAll();
         Task<IEnumerable<Contract>> GetWithParameters();
+        Task AddContract();
+        Task DeleteContract();
+        Task ModifyContract();
     }
 }
