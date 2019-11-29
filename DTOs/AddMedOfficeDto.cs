@@ -3,15 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Clinic.API.Models
+namespace Clinic.API.DTOs
 {
-    public class MedOffice
+    public class AddMedOfficeDto
     {
-        public Guid Id { get; set; }
-        public List<Appointment> Appointments { get; set; }
-        public Department Department { get; set; }
+        public Guid DdepartmentId { get; set; }
         public int OfficeNumber { get; set; }
         public string Description { get; set; }
-
     }
 }

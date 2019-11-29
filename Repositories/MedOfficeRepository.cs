@@ -20,7 +20,7 @@ namespace Clinic.API.Repositories
 
         public async Task<IEnumerable<MedOffice>> GetByDepartment(Department department)
             => await Task.FromResult(_context.MedOffices
-                .Where(medOffice => medOffice.department.Equals(department)).ToList());
+                .Where(medOffice => medOffice.Department.Equals(department)).ToList());
 
         public async Task<MedOffice> GetById(Guid id)
             => await Task.FromResult(_context.MedOffices

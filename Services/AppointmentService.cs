@@ -49,12 +49,14 @@ namespace Clinic.API.Services
                                   .AddMinutes(appointment.EndMinute);
                 for(DateTime tempDate= startDate; tempDate <= endDate; tempDate=tempDate.AddMinutes(appointment.RangeInMinutes))
                 {
-                    var tempAppointment = new Appointment();
-                    tempAppointment.Date = tempDate;
-                  //  tempAppointment.Doctor = (Doctor)doctor;
-                   // tempAppointment.MedOffice = medOffice;
+                    //  tempAppointment.Doctor = (Doctor)doctor;
+                    // tempAppointment.MedOffice = medOffice;
 
-                    appointments.Add(tempAppointment);
+                    appointments.Add(new Appointment
+                    {
+                        Id = Guid.NewGuid(),
+                        Date = tempDate,
+                    }); ; 
 
                 }
     
