@@ -26,6 +26,12 @@ namespace Clinic.API.Repositories
             => await Task.FromResult(_context.MedOffices
                 .SingleOrDefault(medOffice => medOffice.Id == id));
 
+        public async Task<MedOffice> GetByOfficeNumberAndDepartmentId(int number, Guid departmentId)
+            => await Task.FromResult(_context.MedOffices
+                .Where(office => office.OfficeNumber == number && office.Department.Id == departmentId)
+                .FirstOrDefault());
+
+
         public async Task AddMedOffice(MedOffice medOffice)
         {
             await _context.MedOffices.AddAsync(medOffice);
@@ -46,5 +52,7 @@ namespace Clinic.API.Repositories
             await _context.SaveChangesAsync();
             await Task.CompletedTask;
         }
+
+
     }
 }

@@ -1,4 +1,5 @@
-﻿using Clinic.API.Models;
+﻿using Clinic.API.DTOs;
+using Clinic.API.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,9 +10,10 @@ namespace Clinic.API.IServices
     public interface IMedOfficeService
     {
         Task<IEnumerable<MedOffice>> GetAll();
-        Task<MedOffice> GetById();
-        Task AddMedOffice();
-        Task UpdateMedArea();
-        Task DeleteMedArea();
+        Task<MedOffice> GetById(Guid id);
+        Task<IEnumerable<MedOffice>> GetByDepartment(Guid departmentId);
+        Task AddMedOffice(AddMedOfficeDto medOffice);
+        Task UpdateMedOffice(AddMedOfficeDto medOffice);
+        Task DeleteMedOffice(Guid id);
     }
 }
