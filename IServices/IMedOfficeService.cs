@@ -13,7 +13,7 @@ namespace Clinic.API.IServices
         Task<MedOffice> GetById(Guid id);
         Task<IEnumerable<MedOffice>> GetByDepartment(Guid departmentId);
         Task AddMedOffice(AddMedOfficeDto medOffice);
-        Task UpdateMedOffice(AddMedOfficeDto medOffice);
+        Task UpdateMedOffice(EditMedOfficeDto medOffice);
         Task DeleteMedOffice(Guid id);
     }
 }

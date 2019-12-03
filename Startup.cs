@@ -48,6 +48,7 @@ namespace Clinic.API
             services.AddScoped<IRootService, RootService>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IAppointmentService, AppointmentService>();
+            services.AddScoped<IMedOfficeService, MedOfficeService>();
 
             services.AddScoped<IJwtHandler, JwtHandler>();
             services.AddCors();
