@@ -33,5 +33,12 @@ namespace Clinic.API.Controllers
             await _departmentService.AddDepartment(department);
             return Created("/department", null);
         }
+
+        [HttpPut]
+        public async Task<IActionResult> EditDepartment([FromBody] AddDepartmentDto depart)
+        {
+            await _departmentService.UpdateDepartment(depart);
+            return NoContent();
+        }
     }
 }

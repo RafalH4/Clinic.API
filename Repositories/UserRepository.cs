@@ -29,5 +29,12 @@ namespace Clinic.API.Repositories
         public async Task<User> GetByPesel(string pesel)
             => await Task.FromResult(_context.Users.SingleOrDefault(
                 user => user.Pesel == pesel));
+
+        public async Task UpdateUser(User user)
+        {
+            _context.Users.Update(user);
+            await _context.SaveChangesAsync();
+            await Task.CompletedTask;
+        }
     }
 }

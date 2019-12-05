@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Clinic.API.DTOs
 {
-    public abstract class UserDto
+    public class UserDto
     {
         public Guid Id { get; set; }
         public string Email { get; set; }

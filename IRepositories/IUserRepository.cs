@@ -12,5 +12,6 @@ namespace Clinic.API.IRepositories
         Task<User> GetById(Guid id);
         Task<User> GetByEmail(string email);
         Task<User> GetByPesel(string pesel);
+        Task UpdateUser(User user);
     }
 }
