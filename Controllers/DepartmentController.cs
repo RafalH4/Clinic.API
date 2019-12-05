@@ -27,12 +27,9 @@ namespace Clinic.API.Controllers
             return Json(departments);
         }
 
-        [HttpGet("/id/{id}")]
+        [HttpGet("{id}")]
         public async Task<ActionResult<Department>> GetById(Guid id)
-        {
-            var department = await _departmentService.GetById(id);
-            return Json(department);
-        }
+            => await _departmentService.GetById(id);
 
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] AddDepartmentDto department)
@@ -42,9 +39,15 @@ namespace Clinic.API.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> EditDepartment([FromBody] AddDepartmentDto depart)
+        public async Task<IActionResult> EditDepartment([FromBody] AddDepartmentDto department)
+        { 
+            await _departmentService.UpdateDepartment(department);
+            return NoContent();
+        }
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteDepartment(Guid id)
         {
-            await _departmentService.UpdateDepartment(depart);
+            await _departmentService.DeleteDepartment(id);
             return NoContent();
         }
     }
