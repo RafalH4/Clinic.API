@@ -16,7 +16,11 @@ namespace Clinic.API.Repositories
             _context = context;
         }
         public async Task<IEnumerable<MedOffice>> Get()
-            => await Task.FromResult(_context.MedOffices.ToList());
+        {
+            var medOffice = await Task.FromResult(_context.MedOffices.ToList());
+            return medOffice;
+        }
+         //   => await Task.FromResult(_context.MedOffices.ToList());
 
         public async Task<IEnumerable<MedOffice>> GetByDepartment(Department department)
             => await Task.FromResult(_context.MedOffices
@@ -26,9 +30,9 @@ namespace Clinic.API.Repositories
             => await Task.FromResult(_context.MedOffices
                 .SingleOrDefault(medOffice => medOffice.Id == id));
 
-        public async Task<MedOffice> GetByOfficeNumberAndDepartmentId(int number, Guid departmentId)
+        public async Task<MedOffice> GetByOfficeNumberAndDepartmentId(int number, string departmentName)
             => await Task.FromResult(_context.MedOffices
-                .Where(office => office.OfficeNumber == number && office.Department.Id == departmentId)
+                .Where(office => office.OfficeNumber == number && office.Department.Name == departmentName)
                 .FirstOrDefault());
 
 

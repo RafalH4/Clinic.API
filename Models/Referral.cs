@@ -9,7 +9,9 @@ namespace Clinic.API.Models
     {
         public Guid Id { get; set; }
         public Appointment Appointment { get; set; }
+        public Guid AppointmentId { get; set; }
         public DateTime CreatedAt { get; set; }
         public Treatment Treatment { get; set; }
+        public Guid TreatmentId { get; set; }
     }
 }

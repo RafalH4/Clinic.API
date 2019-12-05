@@ -7,7 +7,7 @@ namespace Clinic.API.DTOs
 {
     public class AddMedOfficeDto
     {
-        public Guid DepartmentId { get; set; }
+        public string DepartmentName { get; set; }
         public int OfficeNumber { get; set; }
         public string Description { get; set; }
     }

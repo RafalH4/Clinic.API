@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Clinic.API.DTOs;
 using Clinic.API.IServices;
+using Clinic.API.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -20,7 +21,7 @@ namespace Clinic.API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<MedOfficeDto>>> Get()
+        public async Task<ActionResult<IEnumerable<MedOffice>>> Get()
         {
             var medOffices = await _medOfficeService.GetAll();
             return Json(medOffices);

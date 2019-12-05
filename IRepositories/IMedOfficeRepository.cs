@@ -11,7 +11,7 @@ namespace Clinic.API.IRepositories
         Task<IEnumerable<MedOffice>> Get();
         Task<IEnumerable<MedOffice>> GetByDepartment(Department department);
         Task<MedOffice> GetById(Guid id);
-        Task<MedOffice> GetByOfficeNumberAndDepartmentId(int number, Guid departmentId);
+        Task<MedOffice> GetByOfficeNumberAndDepartmentId(int number, string departmentName);
         Task AddMedOffice(MedOffice medOffice);
         Task UpdateMedOffice(MedOffice medOffice);
         Task DeleteMedOffice(MedOffice medOffice);

@@ -20,19 +20,20 @@ namespace Clinic.API.Services
         }
         public async Task AddMedOffice(AddMedOfficeDto medOffice)
         {
-            var tempMedOffice = await _medOfficeRepository.GetByOfficeNumberAndDepartmentId(medOffice.OfficeNumber, medOffice.DepartmentId);
+            var tempMedOffice = await _medOfficeRepository.GetByOfficeNumberAndDepartmentId(medOffice.OfficeNumber, medOffice.DepartmentName);
             if (tempMedOffice != null)
                 throw new Exception("This medOffice is existed id DB");
 
-            var department = _departmentRepository.GetById(medOffice.DepartmentId);
+            var department = await _departmentRepository.GetByName(medOffice.DepartmentName);
             if (department == null)
                 throw new Exception("Bad departmentId");
 
             var newMedOffice = new MedOffice();
             newMedOffice.Id = Guid.NewGuid();
             newMedOffice.Description = medOffice.Description;
-            newMedOffice.Department = await department;
+            newMedOffice.Department =  department;
             newMedOffice.OfficeNumber = medOffice.OfficeNumber;
+
 
             await _medOfficeRepository.AddMedOffice(newMedOffice);
         }
