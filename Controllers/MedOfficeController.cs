@@ -20,7 +20,7 @@ namespace Clinic.API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ReturnMedOfficeDto>>> Get()
+        public async Task<ActionResult<IEnumerable<MedOfficeDto>>> Get()
         {
             var medOffices = await _medOfficeService.GetAll();
             return Json(medOffices);

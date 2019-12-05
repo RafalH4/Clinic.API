@@ -27,6 +27,13 @@ namespace Clinic.API.Controllers
             return Json(departments);
         }
 
+        [HttpGet("/id/{id}")]
+        public async Task<ActionResult<Department>> GetById(Guid id)
+        {
+            var department = await _departmentService.GetById(id);
+            return Json(department);
+        }
+
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] AddDepartmentDto department)
         {

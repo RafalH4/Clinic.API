@@ -60,13 +60,13 @@ namespace Clinic.API.Services
             return await _medOfficeRepository.GetByDepartment(department);
         }
 
-        public async Task UpdateMedOffice(EditMedOfficeDto medOffice)
+        public async Task UpdateMedOffice(MedOfficeDto medOffice)
         {
             var tempMedOffice = await _medOfficeRepository.GetById(medOffice.Id);
             if (tempMedOffice != null)
                 throw new Exception("This medOffice is existed id DB");
 
-            var department = _departmentRepository.GetById(medOffice.DepartmentId);
+            var department = _departmentRepository.GetById(medOffice.Department.Id);
             if (department == null)
                 throw new Exception("Bad departmentId");
 
