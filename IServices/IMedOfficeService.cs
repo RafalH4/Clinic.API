@@ -9,7 +9,7 @@ namespace Clinic.API.IServices
 {
     public interface IMedOfficeService
     {
-        Task<IEnumerable<MedOffice>> GetAll();
+        Task<IEnumerable<MedOfficeDto>> GetAll();
         Task<MedOffice> GetById(Guid id);
         Task<IEnumerable<MedOffice>> GetByDepartment(Guid departmentId);
         Task AddMedOffice(AddMedOfficeDto medOffice);

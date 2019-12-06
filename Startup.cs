@@ -55,9 +55,9 @@ namespace Clinic.API
 
             services.AddScoped<IJwtHandler, JwtHandler>();
             services.AddCors();
-            services.AddMvc(option => option.EnableEndpointRouting = false)
-                .SetCompatibilityVersion(CompatibilityVersion.Version_3_0)
-                .AddNewtonsoftJson(opt => opt.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
+            //services.AddMvc(option => option.EnableEndpointRouting = false)
+            //    .SetCompatibilityVersion(CompatibilityVersion.Version_3_0)
+            //    .AddNewtonsoftJson(opt => opt.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
 
         }
 

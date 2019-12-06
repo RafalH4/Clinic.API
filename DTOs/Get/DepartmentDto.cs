@@ -13,7 +13,6 @@ namespace Clinic.API.DTOs
         public string Name { get; set; }
         public string PhoneNumber { get; set; }
         public string Descriptcion { get; set; }
-        public List<Models.Contract> Contracts { get; set; }
-        public List<MedOffice> MedOffices { get; set; }
+
     }
 }

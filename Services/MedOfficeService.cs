@@ -1,4 +1,5 @@
 ﻿using Clinic.API.DTOs;
+using Clinic.API.DTOs.Mappers;
 using Clinic.API.IRepositories;
 using Clinic.API.IServices;
 using Clinic.API.Models;
@@ -46,8 +47,16 @@ namespace Clinic.API.Services
             await _medOfficeRepository.DeleteMedOffice(tempMedOffice);
         }
 
-        public async Task<IEnumerable<MedOffice>> GetAll()
-            => await _medOfficeRepository.Get();
+        public async Task<IEnumerable<MedOfficeDto>> GetAll()
+        {
+            var offices = await _medOfficeRepository.Get();
+            var newOffices = new List<MedOfficeDto>();
+            foreach (var office in offices)
+                newOffices.Add(office.mapToMedOfficeDto());
+            
+            return newOffices;
+        }
+
 
         public async Task<MedOffice> GetById(Guid id)
             => await _medOfficeRepository.GetById(id);

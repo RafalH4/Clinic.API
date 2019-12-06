@@ -10,9 +10,8 @@ namespace Clinic.API.DTOs
     public class MedOfficeDto
     {
         public Guid Id { get; set; }
-        public List<AppointmentDto> Appointments { get; set; }
-        public DepartmentDto Department { get; set; }
         public int OfficeNumber { get; set; }
         public string Description { get; set; }
+        public DepartmentDto Department { get; set; }
     }
 }
