@@ -14,12 +14,8 @@ namespace Clinic.API.DTOs.Mappers
             newOfficeDto.Id = office.Id;
             newOfficeDto.Description = office.Description;
             newOfficeDto.OfficeNumber = office.OfficeNumber;
-            
-            var newDepartmentDto = new DepartmentDto();
-            newDepartmentDto.Id = office.Department.Id;
-            newDepartmentDto.Name = office.Department.Name;
-            newDepartmentDto.PhoneNumber = office.Department.PhoneNumber;
-            newDepartmentDto.Descriptcion = office.Department.Descriptcion;
+
+            var newDepartmentDto = office.Department.mapToDepartmentDto();
 
             newOfficeDto.Department = newDepartmentDto;
 
