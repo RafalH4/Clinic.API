@@ -10,7 +10,6 @@ namespace Clinic.API.Models
         public Guid Id { get; set; }
         public DateTime SignedAt { get; set; }
         public int NumberOfMonths { get; set; }
-        public Department Department { get; set; }
         public Doctor Doctor { get; set; }
         public MedArea MedArea { get; set; }
         public int HoursPerMonth { get; set; }

@@ -9,6 +9,8 @@ using Clinic.API.IRepositories;
 using Clinic.API.Repositories;
 using Clinic.API.IServices;
 using Clinic.API.Services;
+using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace Clinic.API
 {
@@ -53,6 +55,9 @@ namespace Clinic.API
 
             services.AddScoped<IJwtHandler, JwtHandler>();
             services.AddCors();
+            services.AddMvc(option => option.EnableEndpointRouting = false)
+                .SetCompatibilityVersion(CompatibilityVersion.Version_3_0)
+                .AddNewtonsoftJson(opt => opt.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
 
         }
 

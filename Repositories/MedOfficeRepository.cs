@@ -1,6 +1,7 @@
 ﻿using Clinic.API.Data;
 using Clinic.API.IRepositories;
 using Clinic.API.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +18,7 @@ namespace Clinic.API.Repositories
         }
         public async Task<IEnumerable<MedOffice>> Get()
         {
-            var medOffice = await Task.FromResult(_context.MedOffices.ToList());
+            var medOffice = await Task.FromResult(_context.MedOffices.Include(x => x.Department).ToList());
             return medOffice;
         }
          //   => await Task.FromResult(_context.MedOffices.ToList());

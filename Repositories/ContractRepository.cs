@@ -19,8 +19,7 @@ namespace Clinic.API.Repositories
             => await Task.FromResult(_context.Contracts.ToList());
 
         public async Task<IEnumerable<Contract>> GetByDepartment(Department department)
-            => await Task.FromResult(_context.Contracts
-                .Where(contract => contract.Department.Equals(department)).ToList());
+            => await Task.FromResult(_context.Contracts.ToList());
 
 
 
@@ -35,7 +34,6 @@ namespace Clinic.API.Repositories
 
         public async Task<Contract> GetByDoctorAndDepartment(Doctor doctor, Department department)
             => await Task.FromResult(_context.Contracts
-            .Where(contract => contract.Department.Equals(department))
             .Where(contract => contract.Doctor.Equals(doctor)).FirstOrDefault());
 
         public async Task AddContract(Contract contract)
