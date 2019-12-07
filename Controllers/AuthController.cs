@@ -20,14 +20,13 @@ namespace Clinic.API.Controllers
     {
         private readonly IAuthService _authService;
         private readonly IUserService _userService;
-        private readonly IConfiguration _config;
+
 
         public AuthController(IAuthService authService, 
             IConfiguration config, IUserService userService)
         {
             _authService = authService;
             _userService = userService;
-            _config = config;
         }
 
         [HttpPost("register")]
