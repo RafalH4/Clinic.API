@@ -21,14 +21,14 @@ namespace Clinic.API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Department>>> Get()
+        public async Task<ActionResult<IEnumerable<DepartmentDto>>> Get()
         {
-            var departments = await _departmentService.GetAll() ;
-            return Json(departments);
+            var departaments= await _departmentService.GetAll();
+            return Json(departaments);
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Department>> GetById(Guid id)
+        public async Task<ActionResult<DepartmentDto>> GetById(Guid id)
             => await _departmentService.GetById(id);
 
         [HttpPost]

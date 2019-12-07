@@ -39,7 +39,7 @@ namespace Clinic.API.Migrations
                 column: "DepartmentId",
                 principalTable: "Departments",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Restrict);
+                onDelete: ReferentialAction.Cascade);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -75,7 +75,7 @@ namespace Clinic.API.Migrations
                 column: "DepartmentId",
                 principalTable: "Departments",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Restrict);
+                onDelete: ReferentialAction.Cascade);
 
             migrationBuilder.AddForeignKey(
                 name: "FK_MedOffices_Departments_departmentId",
@@ -83,7 +83,7 @@ namespace Clinic.API.Migrations
                 column: "departmentId",
                 principalTable: "Departments",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Restrict);
+                onDelete: ReferentialAction.Cascade);
         }
     }
 }

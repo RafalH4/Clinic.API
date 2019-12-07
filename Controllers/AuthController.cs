@@ -31,12 +31,9 @@ namespace Clinic.API.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<IActionResult> Register([FromBody]UserForRegisterDto userFroRegisterDto)
-        { 
-            await _authService.Register(userFroRegisterDto.Email, userFroRegisterDto.Password,
-                userFroRegisterDto.FirstName, userFroRegisterDto.SecondName, userFroRegisterDto.Pesel,
-                userFroRegisterDto.PhoneNumber, userFroRegisterDto.PostCode, userFroRegisterDto.City,
-                userFroRegisterDto.Street, userFroRegisterDto.HouseNumber);
+        public async Task<IActionResult> Register([FromBody]UserForRegisterDto userForRegisterDto)
+        {
+            await _authService.Register(userForRegisterDto);
             
             return StatusCode(201);
 

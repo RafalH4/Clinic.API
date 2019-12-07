@@ -9,8 +9,8 @@ namespace Clinic.API.IServices
 {
     public interface IDepartmentService
     {
-        Task<IEnumerable<Department>> GetAll();
-        Task<Department> GetById(Guid id);
+        Task<IEnumerable<DepartmentDto>> GetAll();
+        Task<DepartmentDto> GetById(Guid id);
         Task<Department> GetByName(string name);
         Task AddDepartment(AddDepartmentDto department);
         Task UpdateDepartment(AddDepartmentDto department);

@@ -1,4 +1,5 @@
-﻿using Clinic.API.Models;
+﻿using Clinic.API.DTOs;
+using Clinic.API.Models;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
@@ -9,9 +10,7 @@ namespace Clinic.API.IServices
 {
     public interface IAuthService
     {
-        Task Register(string email, string password, string firstName, string secondName,
-            string pesel, string phoneNumber, string postCode, string city,
-            string street, string houseNumber);
+        Task Register(UserForRegisterDto userForRegisterDto);
         Task<String> Login(string userName, string password);
 
     }
