@@ -37,5 +37,12 @@ namespace Clinic.API.Controllers
             await _userService.UpdateUser(user);
             return NoContent();
         }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteUser(Guid id)
+        {
+            await _userService.DeleteUser(id);
+            return NoContent();
+        }
     }
 }

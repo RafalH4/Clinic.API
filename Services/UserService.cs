@@ -1,4 +1,5 @@
 ﻿using Clinic.API.DTOs;
+using Clinic.API.Extensions;
 using Clinic.API.IRepositories;
 using Clinic.API.IServices;
 using Clinic.API.Models;
@@ -48,11 +49,15 @@ namespace Clinic.API.Services
             tempUser.HouseNumber = user.HouseNumber;
             tempUser.PhoneNumber = user.PhoneNumber;
 
-
-
-
             await _userRepository.UpdateUser(tempUser);
+        }
 
+        public async Task DeleteUser(Guid id)
+        {
+            var user = await _userRepository.GetById(id);
+            user.ifUserNotExists("Db doesn't contain this doctor");
+
+            await _userRepository.DeleteUser(user);
         }
     }
 }

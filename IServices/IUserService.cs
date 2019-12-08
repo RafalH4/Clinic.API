@@ -13,5 +13,6 @@ namespace Clinic.API.IServices
         Task<IEnumerable<User>> GetAll();
         Task<User> GetById(Guid id);
         Task UpdateUser(UserDto user);
+        Task DeleteUser(Guid id);
     }
 }

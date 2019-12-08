@@ -15,6 +15,14 @@ namespace Clinic.API.Repositories
         {
             _context = context;
         }
+
+        public async Task DeleteUser(User user)
+        {
+            _context.Users.Remove(user);
+            await _context.SaveChangesAsync();
+            await Task.CompletedTask;
+        }
+
         public async Task<IEnumerable<User>> Get()
             => await Task.FromResult(_context.Users.ToList());
 

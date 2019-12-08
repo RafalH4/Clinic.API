@@ -39,7 +39,7 @@ namespace Clinic.API.Controllers
         [HttpPost("newPatient")]
         public async Task<IActionResult> addNewPatient([FromBody]UserForRegisterDto userForRegisterDto)
         {
-            userForRegisterDto.Role = "Patient";
+            userForRegisterDto.Role = "patient";
             await _authService.Register(userForRegisterDto);
             return StatusCode(201);
         }
