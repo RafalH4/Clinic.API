@@ -33,9 +33,15 @@ namespace Clinic.API.Controllers
         public async Task<IActionResult> Register([FromBody]UserForRegisterDto userForRegisterDto)
         {
             await _authService.Register(userForRegisterDto);
-            
             return StatusCode(201);
+        }
 
+        [HttpPost("newPatient")]
+        public async Task<IActionResult> addNewPatient([FromBody]UserForRegisterDto userForRegisterDto)
+        {
+            userForRegisterDto.Role = "Patient";
+            await _authService.Register(userForRegisterDto);
+            return StatusCode(201);
         }
 
         [HttpPost("login")]
