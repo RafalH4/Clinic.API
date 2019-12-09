@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Clinic.API.DTOs;
+using Clinic.API.DTOs.Get;
 using Clinic.API.IRepositories;
 using Clinic.API.IServices;
 using Clinic.API.Models;
@@ -24,7 +25,7 @@ namespace Clinic.API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<DoctorDto>>> Get()
+        public async Task<ActionResult<IEnumerable<DoctorDetailDto>>> Get()
         {
             var doctors = await _doctorService.GetAll();
             return Json(doctors);
@@ -51,14 +52,14 @@ namespace Clinic.API.Controllers
             return Json(doctor);
         }
         
-        [HttpPost]
-        public async Task<IActionResult> Post([FromBody] DoctorDto doctor)
-        {
-            await _doctorService.AddDoctor(doctor.Email, doctor.Password, doctor.Pesel,
-                doctor.FirstName, doctor.SecondName, doctor.PhoneNumber, doctor.PostCode,
-                doctor.City, doctor.Street, doctor.HouseNumber);
-            return Created("/doctors/5", null);
-        }
+        //[HttpPost]
+        //public async Task<IActionResult> Post([FromBody] DoctorDto doctor)
+        //{
+        //    await _doctorService.AddDoctor(doctor.Email, doctor.Password, doctor.Pesel,
+        //        doctor.FirstName, doctor.SecondName, doctor.PhoneNumber, doctor.PostCode,
+        //        doctor.City, doctor.Street, doctor.HouseNumber);
+        //    return Created("/doctors/5", null);
+        //}
        
         [HttpDelete("{doctorId}")]
         public async Task<IActionResult> DeleteDoctor (Guid doctorId)

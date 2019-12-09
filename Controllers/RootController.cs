@@ -48,14 +48,14 @@ namespace Clinic.API.Controllers
             return Json(root);
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Post([FromBody] RootDto root)
-        {
-            await _rootService.AddRoot(root.Email, root.Password, root.Pesel,
-                root.FirstName, root.SecondName, root.PhoneNumber, root.PostCode,
-                root.City, root.Street, root.HouseNumber);
-            return Created("/roots/5", null);
-        }
+        //[HttpPost]
+        //public async Task<IActionResult> Post([FromBody] RootDto root)
+        //{
+        //    await _rootService.AddRoot(root.Email, root.Password, root.Pesel,
+        //        root.FirstName, root.SecondName, root.PhoneNumber, root.PostCode,
+        //        root.City, root.Street, root.HouseNumber);
+        //    return Created("/roots/5", null);
+        //}
 
         [HttpDelete("{rootId}")]
         public async Task<IActionResult> DeleteDoctor(Guid rootId)

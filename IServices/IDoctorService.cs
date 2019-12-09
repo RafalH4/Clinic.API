@@ -1,4 +1,5 @@
-﻿using Clinic.API.Models;
+﻿using Clinic.API.DTOs.Get;
+using Clinic.API.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,10 +9,10 @@ namespace Clinic.API.IServices
 {
     public interface IDoctorService
     {
-        Task<IEnumerable<Doctor>> GetAll();
-        Task<Doctor> GetById(Guid id);
-        Task<Doctor> GetByPesel(string pesel);
-        Task<Doctor> GetByEmail(string email);
+        Task<IEnumerable<DoctorDetailDto>> GetAll();
+        Task<DoctorDetailDto> GetById(Guid id);
+        Task<DoctorDetailDto> GetByPesel(string pesel);
+        Task<DoctorDetailDto> GetByEmail(string email);
         Task AddDoctor(string email, string password, 
             string pesel, string firstName, string secondName,
             string phoneNumber, string postCode, string city, 

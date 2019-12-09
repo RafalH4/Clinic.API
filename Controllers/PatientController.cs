@@ -46,14 +46,14 @@ namespace Clinic.API.Controllers
             return Json(patient);
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Post([FromBody] PatientDto patient)
-        {
-            await _patientService.AddPatient(patient.Email, patient.Password, patient.Pesel,
-                patient.FirstName, patient.SecondName, patient.PhoneNumber, patient.PostCode,
-                patient.City, patient.Street, patient.HouseNumber);
-            return Created("/patients", null);
-        }
+        //[HttpPost]
+        //public async Task<IActionResult> Post([FromBody] PatientDto patient)
+        //{
+        //    await _patientService.AddPatient(patient.Email, patient.Password, patient.Pesel,
+        //        patient.FirstName, patient.SecondName, patient.PhoneNumber, patient.PostCode,
+        //        patient.City, patient.Street, patient.HouseNumber);
+        //    return Created("/patients", null);
+        //}
 
         [HttpDelete("{patientId}")]
         public async Task<IActionResult> DeletePatient(Guid patientId)

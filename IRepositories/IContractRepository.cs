@@ -10,7 +10,7 @@ namespace Clinic.API.IRepositories
     {
         Task<IEnumerable<Contract>> Get();
         Task<IEnumerable<Contract>> GetByDoctor(Doctor doctor);
-        Task<IEnumerable<Contract>> GetByMedArea(MedArea medArea);
+        //Task<IEnumerable<Contract>> GetByMedArea(MedArea medArea);
         Task<IEnumerable<Contract>> GetByDepartment(Department department);
         Task<Contract> GetByDoctorAndDepartment(Doctor doctor, Department department);
         Task AddContract(Contract contract);

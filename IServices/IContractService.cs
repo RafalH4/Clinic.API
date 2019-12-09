@@ -1,4 +1,6 @@
-﻿using Clinic.API.Models;
+﻿using Clinic.API.DTOs;
+using Clinic.API.DTOs.Get;
+using Clinic.API.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace Clinic.API.IServices
 {
-    interface IContractService
+    public interface IContractService
     {
-        Task<IEnumerable<Contract>> GetAll();
-        Task<IEnumerable<Contract>> GetWithParameters();
-        Task AddContract();
-        Task DeleteContract();
-        Task ModifyContract();
+        Task<IEnumerable<ContractDetailsDto>> GetAll();
+        Task<IEnumerable<ContractDetailsDto>> GetWithParameters();
+        Task AddContract(AddContractDto contract);
+        Task DeleteContract(Guid Id);
+        Task ModifyContract(AddContractDto contract);
     }
 }

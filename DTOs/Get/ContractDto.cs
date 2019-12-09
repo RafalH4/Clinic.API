@@ -1,17 +1,15 @@
-﻿using Clinic.API.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Clinic.API.DTOs
+namespace Clinic.API.DTOs.Get
 {
-    public class AddContractDto
+    public class ContractDto
     {
-        public DateTime StartDate { get; set; }
+        public Guid Id { get; set; }
+        public DateTime SignedAt { get; set; }
         public int NumberOfMonths { get; set; }
-        public Guid DepartmentId { get; set; }
-        public Guid DoctorId { get; set; }
         public int HoursPerMonth { get; set; }
         public int SalaryPerMonth { get; set; }
     }

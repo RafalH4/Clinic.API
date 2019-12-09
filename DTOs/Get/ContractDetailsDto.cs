@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Clinic.API.Models
+namespace Clinic.API.DTOs.Get
 {
-    public class Contract
+    public class ContractDetailsDto
     {
         public Guid Id { get; set; }
         public DateTime SignedAt { get; set; }
         public int NumberOfMonths { get; set; }
-        public Doctor Doctor { get; set; }
-        public Department Department { get; set; }
+        public DoctorDto Doctor { get; set; }
+        public DepartmentDto Department { get; set; }
         public int HoursPerMonth { get; set; }
         public int SalaryPerMonth { get; set; }
     }

@@ -2,6 +2,7 @@
 using Clinic.API.Extensions;
 using Clinic.API.IRepositories;
 using Clinic.API.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,7 +33,7 @@ namespace Clinic.API.Repositories
         }
 
         public async Task<IEnumerable<Doctor>> Get()
-            => await Task.FromResult(_context.Doctors.ToList());
+            => await Task.FromResult(_context.Doctors.Include(x => x.Contracts).ToList());
 
         public async Task<Doctor> GetById(Guid id)
             => await Task.FromResult(_context.Doctors.SingleOrDefault(

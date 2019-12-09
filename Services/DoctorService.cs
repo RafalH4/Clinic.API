@@ -6,7 +6,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
+using Clinic.API.DTOs.Get;
+using Clinic.API.DTOs.Mappers;
 
 namespace Clinic.API.Services
 {
@@ -47,28 +48,40 @@ namespace Clinic.API.Services
             await _doctorRepository.DeleteDoctor(doctor);
         }
 
-        public async Task<IEnumerable<Doctor>> GetAll()
-            =>  await _doctorRepository.Get();
+        public async Task<IEnumerable<DoctorDetailDto>> GetAll()
+        {
+            var doctors = await _doctorRepository.Get();
+            var doctorsDetailDto = new List<DoctorDetailDto>();
+            foreach (var doctor in doctors)
+            {
+                var newDoctor = doctor.mapToDoctorDetailDto(doctor.Contracts);
+                doctorsDetailDto.Add(newDoctor);
+            }
+                
+            return doctorsDetailDto;
+        }
+              
         
-        public async Task<Doctor> GetByEmail(string email)
+        public async Task<DoctorDetailDto> GetByEmail(string email)
         {
             var doctor = await _doctorRepository.GetByEmail(email);
             doctor.ifUserNotExists("Db doesn't contain this doctor");
-            return doctor;
+
+            return doctor.mapToDoctorDetailDto(doctor.Contracts);
         }
 
-        public async Task<Doctor> GetById(Guid id)
+        public async Task<DoctorDetailDto> GetById(Guid id)
         {
             var doctor = await _doctorRepository.GetById(id);
             doctor.ifUserNotExists("Db doesn't contain this doctor");
-            return doctor;
+            return doctor.mapToDoctorDetailDto(doctor.Contracts);
         }
 
-        public async Task<Doctor> GetByPesel(string pesel)
+        public async Task<DoctorDetailDto> GetByPesel(string pesel)
         {
             var doctor = await _doctorRepository.GetByPesel(pesel);
             doctor.ifUserNotExists("Db doesn't contain this doctor");
-            return doctor;
+            return doctor.mapToDoctorDetailDto(doctor.Contracts);
         }
 
         public async Task UpdateDoctor(Guid id, string street, string postCode, 

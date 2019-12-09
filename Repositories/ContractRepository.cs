@@ -1,6 +1,7 @@
 ﻿using Clinic.API.Data;
 using Clinic.API.IRepositories;
 using Clinic.API.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,21 +17,21 @@ namespace Clinic.API.Repositories
             _context = context;
         }
         public async Task<IEnumerable<Contract>> Get()
-            => await Task.FromResult(_context.Contracts.ToList());
+            => await Task.FromResult(_context.Contracts
+                .Include(x => x.Doctor)
+                .Include(x => x.Department)
+                .ToList());
 
         public async Task<IEnumerable<Contract>> GetByDepartment(Department department)
             => await Task.FromResult(_context.Contracts.ToList());
-
-
-
 
         public async Task<IEnumerable<Contract>> GetByDoctor(Doctor doctor)
             => await Task.FromResult(_context.Contracts
                 .Where(contract => contract.Doctor.Equals(doctor)).ToList());
 
-        public async Task<IEnumerable<Contract>> GetByMedArea(MedArea medArea)
-            => await Task.FromResult(_context.Contracts
-                .Where(contract => contract.MedArea.Equals(medArea)).ToList());
+        //public async Task<IEnumerable<Contract>> GetByMedArea(MedArea medArea)
+        //    => await Task.FromResult(_context.Contracts
+        //        .Where(contract => contract.MedArea.Equals(medArea)).ToList());
 
         public async Task<Contract> GetByDoctorAndDepartment(Doctor doctor, Department department)
             => await Task.FromResult(_context.Contracts
