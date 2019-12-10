@@ -35,5 +35,12 @@ namespace Clinic.API.Controllers
             var contracts = await _contractService.GetAll();
             return Json(contracts);
         }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<IEnumerable<ContractDetailsDto>>> GetContractsByDepartamentId(Guid id)
+        {
+            var contracts = await _contractService.GetByDeparamentId(id);
+            return Json(contracts);
+        }
     }
 }

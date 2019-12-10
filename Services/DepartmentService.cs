@@ -1,4 +1,5 @@
 ﻿using Clinic.API.DTOs;
+using Clinic.API.DTOs.Get;
 using Clinic.API.DTOs.Mappers;
 using Clinic.API.IRepositories;
 using Clinic.API.IServices;
@@ -43,25 +44,30 @@ namespace Clinic.API.Services
             await _departmentRepository.DeleteDepartment(depart);
         }
 
-        public async Task<IEnumerable<DepartmentDto>> GetAll()
+        public async Task<IEnumerable<DepartmentDetailDto>> GetAll()
         {
             var departments = await _departmentRepository.Get();
-            var departmentsDto = new List<DepartmentDto>();
+            var departmentsDetailDto = new List<DepartmentDetailDto>();
             foreach (var department in departments)
-                departmentsDto.Add(department.mapToDepartmentDto());
-            return departmentsDto;
+                departmentsDetailDto.Add(department.mapToDepartmentDetailDto());
+            return departmentsDetailDto;
         }
 
 
-        public async Task<DepartmentDto> GetById(Guid id)
+        public async Task<DepartmentDetailDto> GetById(Guid id)
         {
             var department = await _departmentRepository.GetById(id);
-            var departmentDto = department.mapToDepartmentDto();
-            return departmentDto;
+            var departmentDetailDto = department.mapToDepartmentDetailDto();
+            return departmentDetailDto;
         }
 
-        public async Task<Department> GetByName(string name)
-        => await _departmentRepository.GetByName(name);
+        public async Task<DepartmentDetailDto> GetByName(string name)
+        {
+            var department = await _departmentRepository.GetByName(name);
+            var departmentDetailDto = department.mapToDepartmentDetailDto();
+            return departmentDetailDto;
+        }
+
         public async Task UpdateDepartment(AddDepartmentDto department)
         {
             var depart = await _departmentRepository.GetByName(department.Name);

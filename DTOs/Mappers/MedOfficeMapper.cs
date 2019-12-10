@@ -15,9 +15,9 @@ namespace Clinic.API.DTOs.Mappers
             newOfficeDto.Description = office.Description;
             newOfficeDto.OfficeNumber = office.OfficeNumber;
 
-            var newDepartmentDto = office.Department.mapToDepartmentDto();
+          //  var newDepartmentDto = office.Department.mapToDepartmentDto();
 
-            newOfficeDto.Department = newDepartmentDto;
+          //  newOfficeDto.Department = newDepartmentDto;
 
             return newOfficeDto;
         }

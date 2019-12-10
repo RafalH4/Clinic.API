@@ -22,8 +22,12 @@ namespace Clinic.API.Repositories
                 .Include(x => x.Department)
                 .ToList());
 
-        public async Task<IEnumerable<Contract>> GetByDepartment(Department department)
-            => await Task.FromResult(_context.Contracts.ToList());
+        public async Task<IEnumerable<Contract>> GetByDepartment(Guid id)
+            => await Task.FromResult(_context.Contracts
+                .Where(x => x.Department.Id == id)
+                .Include(x => x.Department)
+                .Include(x => x.Doctor)
+                .ToList());
 
         public async Task<IEnumerable<Contract>> GetByDoctor(Doctor doctor)
             => await Task.FromResult(_context.Contracts

@@ -11,7 +11,7 @@ namespace Clinic.API.IServices
     public interface IContractService
     {
         Task<IEnumerable<ContractDetailsDto>> GetAll();
-        Task<IEnumerable<ContractDetailsDto>> GetWithParameters();
+        Task<IEnumerable<ContractDetailsDto>> GetByDeparamentId(Guid id);
         Task AddContract(AddContractDto contract);
         Task DeleteContract(Guid Id);
         Task ModifyContract(AddContractDto contract);

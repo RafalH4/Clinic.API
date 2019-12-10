@@ -1,4 +1,5 @@
 ﻿using Clinic.API.DTOs;
+using Clinic.API.DTOs.Get;
 using Clinic.API.DTOs.Mappers;
 using Clinic.API.IRepositories;
 using Clinic.API.IServices;
@@ -70,7 +71,7 @@ namespace Clinic.API.Services
             return await _medOfficeRepository.GetByDepartment(department);
         }
 
-        public async Task UpdateMedOffice(MedOfficeDto medOffice)
+        public async Task UpdateMedOffice(MedOfficeDetailDto medOffice)
         {
             var tempMedOffice = await _medOfficeRepository.GetById(medOffice.Id);
             if (tempMedOffice != null)

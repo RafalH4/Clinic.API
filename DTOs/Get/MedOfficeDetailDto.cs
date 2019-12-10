@@ -1,17 +1,15 @@
-﻿using Clinic.API.DTOs.Get;
-using Clinic.API.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Clinic.API.DTOs
+namespace Clinic.API.DTOs.Get
 {
-    public class MedOfficeDto
+    public class MedOfficeDetailDto
     {
         public Guid Id { get; set; }
         public int OfficeNumber { get; set; }
         public string Description { get; set; }
-
+        public DepartmentDto Department { get; set; }
     }
 }

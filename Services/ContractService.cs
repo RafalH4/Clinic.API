@@ -54,13 +54,14 @@ namespace Clinic.API.Services
             return contractsToReturn;
         }
 
-     
-
-        public Task<IEnumerable<ContractDetailsDto>> GetWithParameters()
+        public async Task<IEnumerable<ContractDetailsDto>> GetByDeparamentId(Guid id)
         {
-            throw new NotImplementedException();
+            var contracts = await _contractRepository.GetByDepartment(id);
+            var contractsToReturn = new List<ContractDetailsDto>();
+            foreach (var contract in contracts)
+                contractsToReturn.Add(contract.mapToContractDetailsDto());
+            return contractsToReturn;
         }
-
         public Task ModifyContract(AddContractDto contract)
         {
             throw new NotImplementedException();

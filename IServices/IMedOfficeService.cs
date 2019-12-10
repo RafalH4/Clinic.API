@@ -1,4 +1,5 @@
 ﻿using Clinic.API.DTOs;
+using Clinic.API.DTOs.Get;
 using Clinic.API.Models;
 using System;
 using System.Collections.Generic;
@@ -13,7 +14,7 @@ namespace Clinic.API.IServices
         Task<MedOffice> GetById(Guid id);
         Task<IEnumerable<MedOffice>> GetByDepartment(Guid departmentId);
         Task AddMedOffice(AddMedOfficeDto medOffice);
-        Task UpdateMedOffice(MedOfficeDto medOffice);
+        Task UpdateMedOffice(MedOfficeDetailDto medOffice);
         Task DeleteMedOffice(Guid id);
     }
 }

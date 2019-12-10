@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Clinic.API.DTOs;
+using Clinic.API.DTOs.Get;
 using Clinic.API.IServices;
 using Clinic.API.Models;
 using Microsoft.AspNetCore.Http;
@@ -28,7 +29,7 @@ namespace Clinic.API.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<DepartmentDto>> GetById(Guid id)
+        public async Task<ActionResult<DepartmentDetailDto>> GetById(Guid id)
             => await _departmentService.GetById(id);
 
         [HttpPost]

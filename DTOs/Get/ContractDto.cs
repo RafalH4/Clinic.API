@@ -12,5 +12,7 @@ namespace Clinic.API.DTOs.Get
         public int NumberOfMonths { get; set; }
         public int HoursPerMonth { get; set; }
         public int SalaryPerMonth { get; set; }
+        public string DoctorFullName { get; set; }
+        public string DepartmentName { get; set; }
     }
 }
