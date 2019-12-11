@@ -39,10 +39,10 @@ namespace Clinic.API.Controllers
             return Created("/department", null);
         }
 
-        [HttpPut]
-        public async Task<IActionResult> EditDepartment([FromBody] AddDepartmentDto department)
+        [HttpPut("{id}")]
+        public async Task<IActionResult> EditDepartment(Guid id, [FromBody] AddDepartmentDto department)
         { 
-            await _departmentService.UpdateDepartment(department);
+            await _departmentService.UpdateDepartment(department, id);
             return NoContent();
         }
         [HttpDelete("{id}")]

@@ -68,9 +68,9 @@ namespace Clinic.API.Services
             return departmentDetailDto;
         }
 
-        public async Task UpdateDepartment(AddDepartmentDto department)
+        public async Task UpdateDepartment(AddDepartmentDto department, Guid id)
         {
-            var depart = await _departmentRepository.GetByName(department.Name);
+            var depart = await _departmentRepository.GetById(id);
             if (depart == null)
             {
                 throw new Exception("Wrong department");

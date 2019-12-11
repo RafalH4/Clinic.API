@@ -1,4 +1,5 @@
-﻿using Clinic.API.Models;
+﻿using Clinic.API.DTOs.Get;
+using Clinic.API.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,12 +15,19 @@ namespace Clinic.API.DTOs.Mappers
             newOfficeDto.Id = office.Id;
             newOfficeDto.Description = office.Description;
             newOfficeDto.OfficeNumber = office.OfficeNumber;
-
-          //  var newDepartmentDto = office.Department.mapToDepartmentDto();
-
-          //  newOfficeDto.Department = newDepartmentDto;
-
             return newOfficeDto;
+        }
+
+        public static MedOfficeDetailDto mapToMedOfficeDetailDto(this MedOffice office)
+        {
+            var newOfficeDetailDto = new MedOfficeDetailDto();
+            newOfficeDetailDto.Id = office.Id;
+            newOfficeDetailDto.Description = office.Description;
+            newOfficeDetailDto.OfficeNumber = office.OfficeNumber;
+            if (office.Department != null)
+                newOfficeDetailDto.Department = office.Department.mapToDepartmentDto();
+
+            return newOfficeDetailDto;
         }
 
     }

@@ -14,7 +14,7 @@ namespace Clinic.API.IServices
         Task<DepartmentDetailDto> GetById(Guid id);
         Task<DepartmentDetailDto> GetByName(string name);
         Task AddDepartment(AddDepartmentDto department);
-        Task UpdateDepartment(AddDepartmentDto department);
+        Task UpdateDepartment(AddDepartmentDto department, Guid id);
         Task DeleteDepartment(Guid id);
     }
 }

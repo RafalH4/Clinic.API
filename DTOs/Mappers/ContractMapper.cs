@@ -51,6 +51,9 @@ namespace Clinic.API.DTOs.Mappers
             contractDetailsDto.SalaryPerMonth = contract.SalaryPerMonth;
             contractDetailsDto.Doctor = contract.Doctor.mapToDoctorDto();
             contractDetailsDto.Department = contract.Department.mapToDepartmentDto();
+            contractDetailsDto.DoctorFullName = String.Concat(contract.Doctor.FirstName, " ", contract.Doctor.SecondName);
+            contractDetailsDto.DepartmentName = contract.Department.Name;
+
 
             return contractDetailsDto;
         }

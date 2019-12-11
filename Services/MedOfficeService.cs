@@ -48,19 +48,26 @@ namespace Clinic.API.Services
             await _medOfficeRepository.DeleteMedOffice(tempMedOffice);
         }
 
-        public async Task<IEnumerable<MedOfficeDto>> GetAll()
+        public async Task<IEnumerable<MedOfficeDetailDto>> GetAll()
         {
             var offices = await _medOfficeRepository.Get();
-            var newOffices = new List<MedOfficeDto>();
+            var newOffices = new List<MedOfficeDetailDto>();
             foreach (var office in offices)
-                newOffices.Add(office.mapToMedOfficeDto());
+                newOffices.Add(office.mapToMedOfficeDetailDto());
             
             return newOffices;
         }
 
 
-        public async Task<MedOffice> GetById(Guid id)
-            => await _medOfficeRepository.GetById(id);
+        public async Task<MedOfficeDetailDto> GetById(Guid id)
+        {
+            var medOffice = await _medOfficeRepository.GetById(id);
+            if (medOffice == null)
+                throw new Exception("Bad MedOffice Id");
+            var newMedOffice = medOffice.mapToMedOfficeDetailDto(); ;
+            return newMedOffice;
+
+        }
 
         public async Task<IEnumerable<MedOffice>> GetByDepartment(Guid departmentId)
         {
@@ -71,13 +78,13 @@ namespace Clinic.API.Services
             return await _medOfficeRepository.GetByDepartment(department);
         }
 
-        public async Task UpdateMedOffice(MedOfficeDetailDto medOffice)
+        public async Task UpdateMedOffice(AddMedOfficeDto medOffice, Guid id)
         {
-            var tempMedOffice = await _medOfficeRepository.GetById(medOffice.Id);
-            if (tempMedOffice != null)
-                throw new Exception("This medOffice is existed id DB");
+            var tempMedOffice = await _medOfficeRepository.GetById(id);
+            if (tempMedOffice == null)
+                throw new Exception("bad id");
 
-            var department = _departmentRepository.GetById(medOffice.Department.Id);
+            var department = _departmentRepository.GetByName(medOffice.DepartmentName);
             if (department == null)
                 throw new Exception("Bad departmentId");
 
@@ -85,7 +92,7 @@ namespace Clinic.API.Services
             tempMedOffice.Description = medOffice.Description;
             tempMedOffice.OfficeNumber = medOffice.OfficeNumber;
             await _medOfficeRepository.UpdateMedOffice(tempMedOffice);
- 
+
         }
     }
 }

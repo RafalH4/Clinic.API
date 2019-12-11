@@ -29,6 +29,7 @@ namespace Clinic.API.Repositories
 
         public async Task<MedOffice> GetById(Guid id)
             => await Task.FromResult(_context.MedOffices
+                .Include(x => x.Department)
                 .SingleOrDefault(medOffice => medOffice.Id == id));
 
         public async Task<MedOffice> GetByOfficeNumberAndDepartmentId(int number, string departmentName)
