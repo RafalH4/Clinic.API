@@ -39,10 +39,20 @@ namespace Clinic.API.Services
             var newContract = contract.mapToContract(department, doctor);
             await _contractRepository.AddContract(newContract);
         }
-
-        public Task DeleteContract(Guid Id)
+        public async Task<ContractDetailsDto> GetById(Guid id)
         {
-            throw new NotImplementedException();
+            var contract = await _contractRepository.GetById(id);
+            var newContract = contract.mapToContractDetailsDto();
+            return newContract;
+        }
+
+        public async Task DeleteContract(Guid id)
+        {
+            var contract = await _contractRepository.GetById(id);
+            if (contract == null)
+                throw new Exception("bad contract id");
+            await _contractRepository.DeleteContract(contract);
+
         }
 
         public async Task<IEnumerable<ContractDetailsDto>> GetAll()
@@ -62,9 +72,18 @@ namespace Clinic.API.Services
                 contractsToReturn.Add(contract.mapToContractDetailsDto());
             return contractsToReturn;
         }
-        public Task ModifyContract(AddContractDto contract)
+
+        public async Task UpdateContract(AddContractDto contract, Guid id)
         {
-            throw new NotImplementedException();
+            var contractFromRepo = await _contractRepository.GetById(id);
+            if (contractFromRepo == null)
+                throw new Exception("bad contract id");
+            contractFromRepo.HoursPerMonth = contract.HoursPerMonth;
+            contractFromRepo.NumberOfMonths = contract.NumberOfMonths;
+            contractFromRepo.SalaryPerMonth = contract.SalaryPerMonth;
+
+            await _contractRepository.UpdateContract(contractFromRepo);
+
         }
     }
 }

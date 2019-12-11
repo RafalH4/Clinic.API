@@ -22,6 +22,12 @@ namespace Clinic.API.Repositories
                 .Include(x => x.Department)
                 .ToList());
 
+        public async Task<Contract> GetById(Guid id)
+             => await Task.FromResult(_context.Contracts
+                 .Include(x => x.Doctor)
+                 .Include(x => x.Department)
+                 .SingleOrDefault(x => x.Id == id));
+
         public async Task<IEnumerable<Contract>> GetByDepartment(Guid id)
             => await Task.FromResult(_context.Contracts
                 .Where(x => x.Department.Id == id)
@@ -39,7 +45,9 @@ namespace Clinic.API.Repositories
 
         public async Task<Contract> GetByDoctorAndDepartment(Doctor doctor, Department department)
             => await Task.FromResult(_context.Contracts
-            .Where(contract => contract.Doctor.Equals(doctor)).FirstOrDefault());
+                .Where(contract => contract.Doctor.Equals(doctor))
+                .Where(contract => contract.Department.Equals(department))
+                .FirstOrDefault());
 
         public async Task AddContract(Contract contract)
         {

@@ -35,12 +35,33 @@ namespace Clinic.API.Controllers
             var contracts = await _contractService.GetAll();
             return Json(contracts);
         }
+        [HttpGet("id/{id}")]
+        public async Task<IActionResult> GetById(Guid id)
+        {
+            var contract = await _contractService.GetById(id);
+            return Json(contract);
+        }
 
-        [HttpGet("{id}")]
+        [HttpGet("department/{id}")]
         public async Task<ActionResult<IEnumerable<ContractDetailsDto>>> GetContractsByDepartamentId(Guid id)
         {
             var contracts = await _contractService.GetByDeparamentId(id);
             return Json(contracts);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteContract(Guid id)
+        {
+            await _contractService.DeleteContract(id);
+            return NoContent();
+        }
+
+        [HttpPut("update/{id}")]
+        public async Task<IActionResult> UpdateContract(Guid id, [FromBody]AddContractDto contract)
+        {
+            await _contractService.UpdateContract(contract, id);
+
+            return NoContent();
         }
     }
 }
