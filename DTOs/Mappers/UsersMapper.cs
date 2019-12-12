@@ -49,5 +49,22 @@ namespace Clinic.API.DTOs.Mappers
             newDoctor.City = doctor.City;
             return newDoctor;
         }
+
+        public static PatientDto mapToPatientDto(this Patient patient)
+        {
+            var newPatient = new PatientDto();
+            newPatient.Id = patient.Id;
+            newPatient.Pesel = patient.Pesel;
+            newPatient.PhoneNumber = patient.PhoneNumber;
+            newPatient.HouseNumber = patient.HouseNumber;
+            newPatient.PostCode = patient.PostCode;
+            newPatient.Role = patient.Role;
+            newPatient.Street = patient.Street;
+            newPatient.FirstName = patient.FirstName;
+            newPatient.SecondName = patient.SecondName;
+            newPatient.Email = patient.Email;
+            newPatient.City = patient.City;
+            return newPatient;
+        }
     }
 }

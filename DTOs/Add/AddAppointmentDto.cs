@@ -9,9 +9,9 @@ namespace Clinic.API.DTOs
     public class AddAppointmentDto
     {
         public List<DateTime> Dates { get; set; }
-        public int StartHour { get; set; }
+        public string StartHour { get; set; }
         public int StartMinute { get; set; }
-        public int EndHour { get; set; }
+        public string EndHour { get; set; }
         public int EndMinute { get; set; }
         public int RangeInMinutes { get; set; }
         public Guid DoctorId { get; set; }

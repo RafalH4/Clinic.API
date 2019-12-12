@@ -8,9 +8,10 @@ namespace Clinic.API.Filters
 {
     public class AppointmentFilter
     {
-        public DateTime Date { get; set; }
-        public MedOffice MedOffice { get; set; }
-        public Patient Patient { get; set; }
-        public Doctor Doctor { get; set; }
+        public DateTime? StartDate { get; set; }
+        public DateTime? EndDate { get; set; }
+        public MedOffice? MedOffice { get; set; }
+        public Patient? Patient { get; set; }
+        public Doctor? Doctor { get; set; }
     }
 }
