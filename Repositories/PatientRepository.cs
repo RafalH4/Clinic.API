@@ -1,6 +1,7 @@
 ﻿using Clinic.API.Data;
 using Clinic.API.IRepositories;
 using Clinic.API.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;

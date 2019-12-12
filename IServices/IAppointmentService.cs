@@ -1,4 +1,5 @@
 ﻿using Clinic.API.DTOs;
+using Clinic.API.DTOs.Add;
 using Clinic.API.DTOs.Get;
 using Clinic.API.Filters;
 using Clinic.API.Models;
@@ -17,9 +18,11 @@ namespace Clinic.API.IServices
             Guid? doctorId,
             Guid? patientId,
             Guid? medOfficeId,
+            string? departmentName,
             bool? isFree);
         Task AddAppointment(AddAppointmentDto appointment);
         Task DeleteAppointment(Guid id);
         Task ModifyAppointment(AddAppointmentDto appointment);
+        Task AddPatientToAppointment(AddUserToAppointmentDto assigment);
     }
 }

@@ -10,6 +10,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Clinic.API.DTOs.Get;
 using Clinic.API.DTOs.Mappers;
+using Clinic.API.DTOs.Add;
 
 namespace Clinic.API.Services
 {
@@ -20,18 +21,21 @@ namespace Clinic.API.Services
         private readonly IUserRepository _userRepository;
         private readonly IDoctorRepository _doctorRepository;
         private readonly IMedAreaRepository _medAreaRepository;
+        private readonly IPatientRepository _patientRepository;
 
         public AppointmentService(IAppointmentRepository appointmentrepository,
                     IMedOfficeRepository medOfficeRepository,
                     IUserRepository userRepository,
                     IMedAreaRepository medAreaRepository,
-                    IDoctorRepository doctorRepository)
+                    IDoctorRepository doctorRepository,
+                    IPatientRepository patientRepositry)
         {
             _appointmentRepository = appointmentrepository;
             _medOfficeRepository = medOfficeRepository;
             _userRepository = userRepository;
             _medAreaRepository = medAreaRepository;
             _doctorRepository = doctorRepository;
+            _patientRepository = patientRepositry;
         }
         async public Task AddAppointment(AddAppointmentDto appointment)
         {
@@ -71,9 +75,26 @@ namespace Clinic.API.Services
 
         }
 
-        public Task DeleteAppointment(Guid id)
+        public async Task AddPatientToAppointment(AddUserToAppointmentDto assigment)
         {
-            throw new NotImplementedException();
+            var patient = await _patientRepository.GetById(assigment.UserId);
+            if (patient == null)
+                throw new Exception("bad patient id");
+            var appointment = await _appointmentRepository.GetById(assigment.AppointmentId);
+            if (appointment == null)
+                throw new Exception("bad appointment it");
+
+            appointment.Patient = patient;
+
+            await _appointmentRepository.UpdateAppointment(appointment);
+        }
+
+        public async Task DeleteAppointment(Guid id)
+        {
+            var appointment = await _appointmentRepository.GetById(id);
+            if (appointment == null)
+                throw new Exception("bad appointmentId");
+            await _appointmentRepository.DeleteAppointment(appointment);
         }
 
         public Task<IEnumerable<AppointmentDto>> GetAll()
@@ -82,8 +103,13 @@ namespace Clinic.API.Services
         }
 
         public async Task<IEnumerable<AppointmentDto>> GetWithFilter(DateTime? startDate,
-            DateTime? endDate, Guid? doctorId, Guid? patientId, Guid? medOfficeId, bool? isFree) {
-            var appointments = await _appointmentRepository.GetWithFilters(startDate, endDate, doctorId, patientId, medOfficeId, isFree);
+            DateTime? endDate, 
+            Guid? doctorId, 
+            Guid? patientId, 
+            Guid? medOfficeId,
+            string? departmentName, 
+            bool? isFree) {
+            var appointments = await _appointmentRepository.GetWithFilters(startDate, endDate, doctorId, patientId, medOfficeId, departmentName, isFree);
             var appointmentsDto = new List<AppointmentDto>();
             foreach(var appointment in appointments)
                 appointmentsDto.Add(appointment.mapToAppointmentDto());

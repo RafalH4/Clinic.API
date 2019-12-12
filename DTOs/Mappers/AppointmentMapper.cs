@@ -16,7 +16,12 @@ namespace Clinic.API.DTOs.Mappers
             newAppointmentDto.Date = appointment.Date;
             newAppointmentDto.Anamnesis = appointment.Anamnesis;
             if(appointment.MedOffice != null)
+            {
                 newAppointmentDto.MedOffice = appointment.MedOffice.mapToMedOfficeDto();
+                if (appointment.MedOffice.Department != null)
+                    newAppointmentDto.DepartmentName = appointment.MedOffice.Department.Name;
+
+            } 
             if (appointment.Patient != null)
                 newAppointmentDto.Patient = appointment.Patient.mapToPatientDto();
             if (appointment.Doctor != null)

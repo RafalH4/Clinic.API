@@ -41,7 +41,7 @@ namespace Clinic.API.Repositories
         public async Task UpdateAppointment(Appointment appointment)
         {
             _context.Appointments.Update(appointment);
-            await _context.SaveChangesAsync();
+            _context.SaveChanges();
             await Task.CompletedTask;
         }
 
@@ -49,18 +49,21 @@ namespace Clinic.API.Repositories
             => await Task.FromResult(_context.Appointments.ToList());
 
         public async Task<IEnumerable<Appointment>> GetWithFilters(DateTime? startDate, DateTime? endDate, Guid? doctorId, 
-            Guid? patientId, Guid? medOfficeId, bool? isFree)
+            Guid? patientId, Guid? medOfficeId, string? departmentName, bool? isFree)
         {
             var appointments = await Task.FromResult(_context.Appointments
                 .Include(x => x.MedOffice)
+                .Include(x =>x.MedOffice.Department)
                 .Include(x => x.Patient)
                 .Include(x => x.Doctor)
                 .ToList());
             DateTime? a = null;
             if (startDate is DateTime newStartDate)
                 appointments = appointments.Where(appointment => DateTime.Compare(appointment.Date, newStartDate) >0).ToList();
-            if (startDate is DateTime newEndDate)
+            if (endDate is DateTime newEndDate)
                 appointments = appointments.Where(appointment => DateTime.Compare(appointment.Date, newEndDate) < 0).ToList();
+            if (departmentName is string newDepartmentName)
+                appointments = appointments.Where(appointment => appointment.MedOffice.Department.Name == newDepartmentName).ToList();
             if (doctorId is Guid newdoctorId)
                 appointments = appointments.Where(appointment => appointment.Doctor.Id==doctorId).ToList();
             if (patientId is Guid newPatientId)
@@ -74,6 +77,8 @@ namespace Clinic.API.Repositories
             return appointments;
         }
 
-
+        public async Task<Appointment> GetById(Guid id)
+            => await Task.FromResult(_context.Appointments.SingleOrDefault(
+                appointment => appointment.Id == id));
     }
 }

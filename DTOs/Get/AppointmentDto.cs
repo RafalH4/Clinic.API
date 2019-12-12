@@ -10,6 +10,7 @@ namespace Clinic.API.DTOs.Get
         public Guid Id { get; set; }
         public DateTime Date { get; set; }
         public string Anamnesis { get; set; }
+        public string DepartmentName { get; set; }
         public List<ReferralDto> Referrals { get; set; }
         public List<PrescriptionDto> Prescriptions { get; set; }
         public MedOfficeDto MedOffice { get; set; }
