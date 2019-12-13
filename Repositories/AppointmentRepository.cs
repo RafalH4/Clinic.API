@@ -57,7 +57,7 @@ namespace Clinic.API.Repositories
                 .Include(x => x.Patient)
                 .Include(x => x.Doctor)
                 .ToList());
-            DateTime? a = null;
+
             if (startDate is DateTime newStartDate)
                 appointments = appointments.Where(appointment => DateTime.Compare(appointment.Date, newStartDate) >0).ToList();
             if (endDate is DateTime newEndDate)
@@ -65,15 +65,13 @@ namespace Clinic.API.Repositories
             if (departmentName is string newDepartmentName)
                 appointments = appointments.Where(appointment => appointment.MedOffice.Department.Name == newDepartmentName).ToList();
             if (doctorId is Guid newdoctorId)
-                appointments = appointments.Where(appointment => appointment.Doctor.Id==doctorId).ToList();
+                appointments = appointments.Where(appointment => appointment.Doctor.Id == newdoctorId).ToList();
             if (patientId is Guid newPatientId)
-                appointments = appointments.Where(appointment => appointment.Patient.Id == newPatientId).ToList();
+                appointments = appointments.Where(appointment => appointment.Patient?.Id == newPatientId).ToList();
             if (medOfficeId is Guid newMedOfficeId)
                 appointments = appointments.Where(appointment => appointment.MedOffice.Id == newMedOfficeId).ToList();
-
-
-         //   if (isFree is bool newIsFree)
-       //         appointments = appointments.Where(appointment => appointment.Patient.Equals(null)).ToList();
+            if (isFree == true)
+                appointments = appointments.Where(appointment => appointment.Patient == null).ToList();
             return appointments;
         }
 
