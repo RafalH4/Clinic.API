@@ -71,9 +71,10 @@ namespace Clinic.API
                         ValidateAudience = false
                     };
                 });
-            //services.AddMvc(option => option.EnableEndpointRouting = false)
-            //    .SetCompatibilityVersion(CompatibilityVersion.Version_3_0)
-            //    .AddNewtonsoftJson(opt => opt.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
+            services.AddAuthorization(x => x.AddPolicy("RootRole", x => x.RequireRole("root")));
+            services.AddAuthorization(x => x.AddPolicy("DoctorRole", x => x.RequireRole("doctor")));
+            services.AddAuthorization(x => x.AddPolicy("NurseRole", x => x.RequireRole("nurse")));
+            services.AddAuthorization(x => x.AddPolicy("PatientRole", x => x.RequireRole("patient")));
 
         }
 

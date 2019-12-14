@@ -23,9 +23,11 @@ namespace Clinic.API.Services
         {
             var claims = new[]
             {
-                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+                new Claim(ClaimTypes.NameIdentifier, user.FirstName+" "+user.SecondName.ToString()),
                 new Claim(ClaimTypes.Name, user.Id.ToString()),
-                new Claim(ClaimTypes.Role, user.Role)
+                new Claim(ClaimTypes.Role, user.Role),
+                new Claim(ClaimTypes.Email, user.Email),
+
             };
 
             var key = new SymmetricSecurityKey(Encoding.UTF8
