@@ -12,6 +12,7 @@ namespace Clinic.API.IRepositories
         Task AddAppointment(Appointment appointment);
         Task AddListAppointments(List<Appointment> appointments);
         Task DeleteAppointment(Appointment appointment);
+        Task <IEnumerable<Appointment>> GetByPatient(Patient patient);
         Task UpdateAppointment(Appointment appointment);
         Task<IEnumerable<Appointment>> GetWithFilters(DateTime? startDate,
             DateTime? endDate, Guid? doctorId, Guid? patientId, Guid? medOfficeId, string? departmentName, bool? isFree);

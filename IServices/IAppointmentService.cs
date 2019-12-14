@@ -13,6 +13,7 @@ namespace Clinic.API.IServices
     public interface IAppointmentService
     {
         Task<IEnumerable<AppointmentDto>> GetAll();
+        Task<IEnumerable<AppointmentDto>> GetByPatientId(Guid id);
         Task<IEnumerable<AppointmentDto>> GetWithFilter(DateTime? startDate,
             DateTime? endDate,
             Guid? doctorId,

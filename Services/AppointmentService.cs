@@ -102,6 +102,18 @@ namespace Clinic.API.Services
             throw new NotImplementedException();
         }
 
+        public async Task<IEnumerable<AppointmentDto>> GetByPatientId(Guid id)
+        {
+            var user = await _patientRepository.GetById(id);
+            user.ifUserNotExists("bad patient id");
+            var appointments = await _appointmentRepository.GetByPatient(user);
+            var appointmentsDto = new List<AppointmentDto>();
+            foreach (var appointment in appointments)
+                appointmentsDto.Add(appointment.mapToAppointmentDto());
+
+            return appointmentsDto;
+        }
+
         public async Task<IEnumerable<AppointmentDto>> GetFreeWithFilter(Guid? doctorId, string? departmentName, DateTime? date)
         {
             var firstHour = new TimeSpan(0, 0, 0);

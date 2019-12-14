@@ -14,7 +14,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Clinic.API.Controllers
 {
-    [Authorize]
     [Route("[controller]")]
     [ApiController]
     public class DoctorController : Controller

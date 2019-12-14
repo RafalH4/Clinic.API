@@ -11,7 +11,7 @@ namespace Clinic.API.Controllers
     [ApiController]
     public class ApiBaseController : Controller
     {
-        protected Guid UserId => User?.Identity?.IsAuthenticated == true ?
+        protected Guid CurrentUserId => User?.Identity?.IsAuthenticated == true ?
             Guid.Parse(User.Identity.Name) :
             Guid.Empty;
     }

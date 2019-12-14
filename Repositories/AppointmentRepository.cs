@@ -79,5 +79,10 @@ namespace Clinic.API.Repositories
             => await Task.FromResult(_context.Appointments.SingleOrDefault(
                 appointment => appointment.Id == id));
 
+        public async Task<IEnumerable<Appointment>> GetByPatient(Patient patient)
+             => await Task.FromResult(_context.Appointments
+                .Include(x => x.MedOffice)
+                .Include(x => x.Doctor)
+                .Where(appointment => appointment.Patient.Equals(patient)).ToList());
     }
 }

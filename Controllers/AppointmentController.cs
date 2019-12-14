@@ -7,6 +7,7 @@ using Clinic.API.DTOs;
 using Clinic.API.DTOs.Add;
 using Clinic.API.Filters;
 using Clinic.API.IServices;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -22,6 +23,7 @@ namespace Clinic.API.Controllers
             _appointmentService = appointmentService;
         }
 
+        [Authorize(Policy = "NurseRole")]
         [HttpGet]
         public async Task<IActionResult> Get([FromQuery]DateTime? startDate,
             [FromQuery]DateTime? endDate,
@@ -35,14 +37,24 @@ namespace Clinic.API.Controllers
 
             return Json(appointments);
         }
-        [HttpGet("user")]
-            public async Task<IActionResult> Get()
+        [HttpGet("addMe/{id}")]
+        public async Task<IActionResult> addMeToAppointment(Guid id)
         {
-           
-            return Json(UserId);
+            var assigment = new AddUserToAppointmentDto();
+            assigment.UserId = CurrentUserId;
+            assigment.AppointmentId = id;
+            await _appointmentService.AddPatientToAppointment(assigment);
+            return Created("/appointment", null);
         }
 
+        [HttpGet("getPatApp{id}")]
+        public async Task<IActionResult> GetMyAppointments()
+        {
+            var appointments = await _appointmentService.GetByPatientId(CurrentUserId);
+            return Json(appointments);
+        }
 
+        // [Authorize(Policy = "PatientRole")]
         [HttpGet("free")]
         public async Task<IActionResult> GetFree(
             [FromQuery]Guid? doctorId,

@@ -32,6 +32,24 @@ namespace Clinic.API
             var dbConnection = @"Server=(localdb)\mssqllocaldb;Database=Clinic2;Trusted_Connection=True";
             services.AddDbContext<DataContext>(opt =>
                opt.UseSqlServer(dbConnection));
+
+
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(opt =>
+                {
+                    opt.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(Configuration.GetSection("AppSettings:Token").Value)),
+                        ValidateIssuer = false,
+                        ValidateAudience = false
+                    };
+                });
+            services.AddAuthorization(x => x.AddPolicy("RootRole", x => x.RequireRole("root")));
+            services.AddAuthorization(x => x.AddPolicy("DoctorRole", x => x.RequireRole("doctor", "root")));
+            services.AddAuthorization(x => x.AddPolicy("NurseRole", x => x.RequireRole("nurse", "doctor", "root")));
+            services.AddAuthorization(x => x.AddPolicy("PatientRole", x => x.RequireRole("patient", "nurse", "doctor", "root")));
+
             services.AddControllers();
             services.AddScoped<IAppointmentRepository, AppointmentRepository>();
             services.AddScoped<IContractRepository, ContractRepository>();
@@ -60,21 +78,6 @@ namespace Clinic.API
             services.AddScoped<IJwtHandler, JwtHandler>();
             services.AddCors();
 
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-                .AddJwtBearer(opt =>
-                {
-                    opt.TokenValidationParameters = new TokenValidationParameters
-                    {
-                        ValidateIssuerSigningKey = true,
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(Configuration.GetSection("AppSettings:Token").Value)),
-                        ValidateIssuer = false,
-                        ValidateAudience = false
-                    };
-                });
-            services.AddAuthorization(x => x.AddPolicy("RootRole", x => x.RequireRole("root")));
-            services.AddAuthorization(x => x.AddPolicy("DoctorRole", x => x.RequireRole("doctor")));
-            services.AddAuthorization(x => x.AddPolicy("NurseRole", x => x.RequireRole("nurse")));
-            services.AddAuthorization(x => x.AddPolicy("PatientRole", x => x.RequireRole("patient")));
 
         }
 
