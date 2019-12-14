@@ -14,7 +14,7 @@ namespace Clinic.API.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    public class AppointmentController : Controller
+    public class AppointmentController : ApiBaseController
     {
         private readonly IAppointmentService _appointmentService;
         public AppointmentController(IAppointmentService appointmentService)
@@ -35,6 +35,13 @@ namespace Clinic.API.Controllers
 
             return Json(appointments);
         }
+        [HttpGet("user")]
+            public async Task<IActionResult> Get()
+        {
+           
+            return Json(UserId);
+        }
+
 
         [HttpGet("free")]
         public async Task<IActionResult> GetFree(
@@ -45,7 +52,6 @@ namespace Clinic.API.Controllers
             var appointments = await _appointmentService.GetFreeWithFilter(doctorId, departmentName, date);
             return Json(appointments);
         }
-
 
         [HttpPost("addUser")]
         public async Task<IActionResult> Post([FromBody] AddUserToAppointmentDto assigment)
