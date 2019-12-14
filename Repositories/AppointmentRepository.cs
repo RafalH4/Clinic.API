@@ -33,7 +33,7 @@ namespace Clinic.API.Repositories
 
         public async Task DeleteAppointment(Appointment appointment)
         {
-             _context.Appointments.Remove(appointment);
+            _context.Appointments.Remove(appointment);
             await _context.SaveChangesAsync();
             await Task.CompletedTask;
         }
@@ -48,20 +48,20 @@ namespace Clinic.API.Repositories
         public async Task<IEnumerable<Appointment>> Get()
             => await Task.FromResult(_context.Appointments.ToList());
 
-        public async Task<IEnumerable<Appointment>> GetWithFilters(DateTime? startDate, DateTime? endDate, Guid? doctorId, 
+        public async Task<IEnumerable<Appointment>> GetWithFilters(DateTime? startDate, DateTime? endDate, Guid? doctorId,
             Guid? patientId, Guid? medOfficeId, string? departmentName, bool? isFree)
         {
             var appointments = await Task.FromResult(_context.Appointments
                 .Include(x => x.MedOffice)
-                .Include(x =>x.MedOffice.Department)
+                .Include(x => x.MedOffice.Department)
                 .Include(x => x.Patient)
                 .Include(x => x.Doctor)
                 .ToList());
 
             if (startDate is DateTime newStartDate)
-                appointments = appointments.Where(appointment => DateTime.Compare(appointment.Date, newStartDate) >0).ToList();
+                appointments = appointments.Where(appointment => DateTime.Compare(appointment.Date, newStartDate) >= 0).ToList();
             if (endDate is DateTime newEndDate)
-                appointments = appointments.Where(appointment => DateTime.Compare(appointment.Date, newEndDate) < 0).ToList();
+                appointments = appointments.Where(appointment => DateTime.Compare(appointment.Date, newEndDate) <= 0).ToList();
             if (departmentName is string newDepartmentName)
                 appointments = appointments.Where(appointment => appointment.MedOffice.Department.Name == newDepartmentName).ToList();
             if (doctorId is Guid newdoctorId)
@@ -72,11 +72,12 @@ namespace Clinic.API.Repositories
                 appointments = appointments.Where(appointment => appointment.MedOffice.Id == newMedOfficeId).ToList();
             if (isFree == true)
                 appointments = appointments.Where(appointment => appointment.Patient == null).ToList();
-            return appointments;
+            return appointments.OrderBy(d => d.Date);
         }
 
         public async Task<Appointment> GetById(Guid id)
             => await Task.FromResult(_context.Appointments.SingleOrDefault(
                 appointment => appointment.Id == id));
+
     }
 }

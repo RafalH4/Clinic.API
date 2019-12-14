@@ -20,6 +20,8 @@ namespace Clinic.API.IServices
             Guid? medOfficeId,
             string? departmentName,
             bool? isFree);
+
+        Task<IEnumerable<AppointmentDto>> GetFreeWithFilter(Guid? doctorId, string? departmentName, DateTime? date);
         Task AddAppointment(AddAppointmentDto appointment);
         Task DeleteAppointment(Guid id);
         Task ModifyAppointment(AddAppointmentDto appointment);

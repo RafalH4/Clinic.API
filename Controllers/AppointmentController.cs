@@ -35,6 +35,18 @@ namespace Clinic.API.Controllers
 
             return Json(appointments);
         }
+
+        [HttpGet("free")]
+        public async Task<IActionResult> GetFree(
+            [FromQuery]Guid? doctorId,
+            [FromQuery]string? departmentName,
+            [FromQuery]DateTime? date)
+        {
+            var appointments = await _appointmentService.GetFreeWithFilter(doctorId, departmentName, date);
+            return Json(appointments);
+        }
+
+
         [HttpPost("addUser")]
         public async Task<IActionResult> Post([FromBody] AddUserToAppointmentDto assigment)
         {

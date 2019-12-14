@@ -15,7 +15,6 @@ namespace Clinic.API.IRepositories
         Task UpdateAppointment(Appointment appointment);
         Task<IEnumerable<Appointment>> GetWithFilters(DateTime? startDate,
             DateTime? endDate, Guid? doctorId, Guid? patientId, Guid? medOfficeId, string? departmentName, bool? isFree);
-
         Task<Appointment> GetById(Guid id);
 
 

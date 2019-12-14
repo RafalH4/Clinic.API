@@ -102,13 +102,35 @@ namespace Clinic.API.Services
             throw new NotImplementedException();
         }
 
+        public async Task<IEnumerable<AppointmentDto>> GetFreeWithFilter(Guid? doctorId, string? departmentName, DateTime? date)
+        {
+            var firstHour = new TimeSpan(0, 0, 0);
+            var lastHour = new TimeSpan(23, 59, 59);
+            DateTime firstDate = (DateTime)date;
+            DateTime lastDate = (DateTime)date;
+            firstDate = firstDate.Date + firstHour;
+            lastDate = lastDate.Date + lastHour;
+            var appointments = await _appointmentRepository.GetWithFilters(firstDate, lastDate, doctorId, null, null, departmentName, true);
+            var appointmentsDto = new List<AppointmentDto>();
+            foreach (var appointment in appointments)
+                appointmentsDto.Add(appointment.mapToAppointmentDto());
+            return appointmentsDto;
+
+            
+        }
+
         public async Task<IEnumerable<AppointmentDto>> GetWithFilter(DateTime? startDate,
             DateTime? endDate, 
             Guid? doctorId, 
             Guid? patientId, 
             Guid? medOfficeId,
             string? departmentName, 
-            bool? isFree) {
+            bool? isFree) 
+        {
+            TimeSpan firstTime = new TimeSpan(0, 0, 0);
+            TimeSpan lastTime = new TimeSpan(23, 59, 59);
+            startDate += firstTime;
+            endDate += lastTime;
             var appointments = await _appointmentRepository.GetWithFilters(startDate, endDate, doctorId, patientId, medOfficeId, departmentName, isFree);
             var appointmentsDto = new List<AppointmentDto>();
             foreach(var appointment in appointments)
