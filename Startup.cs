@@ -11,6 +11,9 @@ using Clinic.API.IServices;
 using Clinic.API.Services;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace Clinic.API
 {
@@ -56,6 +59,18 @@ namespace Clinic.API
 
             services.AddScoped<IJwtHandler, JwtHandler>();
             services.AddCors();
+
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(opt =>
+                {
+                    opt.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(Configuration.GetSection("AppSettings:Token").Value)),
+                        ValidateIssuer = false,
+                        ValidateAudience = false
+                    };
+                });
             //services.AddMvc(option => option.EnableEndpointRouting = false)
             //    .SetCompatibilityVersion(CompatibilityVersion.Version_3_0)
             //    .AddNewtonsoftJson(opt => opt.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
@@ -75,6 +90,7 @@ namespace Clinic.API
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

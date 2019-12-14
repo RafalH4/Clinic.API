@@ -135,4 +135,7 @@ E:\WAT\Inżynierka\Przychodnia lekarska\App\Clinic.API\bin\Debug\netcoreapp3.0\S
 E:\WAT\Inżynierka\Przychodnia lekarska\App\Clinic.API\bin\Debug\netcoreapp3.0\Microsoft.AspNetCore.JsonPatch.dll
 E:\WAT\Inżynierka\Przychodnia lekarska\App\Clinic.API\bin\Debug\netcoreapp3.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
 E:\WAT\Inżynierka\Przychodnia lekarska\App\Clinic.API\bin\Debug\netcoreapp3.0\Newtonsoft.Json.Bson.dll
+E:\WAT\Inżynierka\Przychodnia lekarska\App\Clinic.API\bin\Debug\netcoreapp3.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+E:\WAT\Inżynierka\Przychodnia lekarska\App\Clinic.API\bin\Debug\netcoreapp3.0\Microsoft.IdentityModel.Protocols.dll
+E:\WAT\Inżynierka\Przychodnia lekarska\App\Clinic.API\bin\Debug\netcoreapp3.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
 E:\WAT\Inżynierka\Przychodnia lekarska\App\Clinic.API\obj\Debug\netcoreapp3.0\Clinic.API.MvcApplicationPartsAssemblyInfo.cache

@@ -8,11 +8,13 @@ using Clinic.API.IRepositories;
 using Clinic.API.IServices;
 using Clinic.API.Models;
 using Clinic.API.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Clinic.API.Controllers
 {
+    [Authorize]
     [Route("[controller]")]
     [ApiController]
     public class DoctorController : Controller
@@ -23,7 +25,6 @@ namespace Clinic.API.Controllers
         {
             _doctorService = doctorService;
         }
-
         [HttpGet]
         public async Task<ActionResult<IEnumerable<DoctorDetailDto>>> Get()
         {
