@@ -14,6 +14,7 @@ namespace Clinic.API.IServices
     {
         Task<IEnumerable<AppointmentDto>> GetAll();
         Task<IEnumerable<AppointmentDto>> GetByPatientId(Guid id);
+        Task<IEnumerable<AppointmentDto>> GetByDoctorId(Guid id);
         Task<IEnumerable<AppointmentDto>> GetWithFilter(DateTime? startDate,
             DateTime? endDate,
             Guid? doctorId,

@@ -47,10 +47,17 @@ namespace Clinic.API.Controllers
             return Created("/appointment", null);
         }
 
-        [HttpGet("getPatApp{id}")]
-        public async Task<IActionResult> GetMyAppointments()
+        [HttpGet("getPatientAppointments")]
+        public async Task<IActionResult> GetMyPatientAppointments()
         {
             var appointments = await _appointmentService.GetByPatientId(CurrentUserId);
+            return Json(appointments);
+        }
+
+        [HttpGet("getDoctorAppointments")]
+        public async Task<IActionResult> GetMyDoctorAppointments()
+        {
+            var appointments = await _appointmentService.GetByDoctorId(CurrentUserId);
             return Json(appointments);
         }
 

@@ -114,6 +114,18 @@ namespace Clinic.API.Services
             return appointmentsDto;
         }
 
+        public async Task<IEnumerable<AppointmentDto>> GetByDoctorId(Guid id)
+        {
+            var user = await _doctorRepository.GetById(id);
+            user.ifUserNotExists("bad patient id");
+            var appointments = await _appointmentRepository.GetByDoctor(user);
+            var appointmentsDto = new List<AppointmentDto>();
+            foreach (var appointment in appointments)
+                appointmentsDto.Add(appointment.mapToAppointmentDto());
+
+            return appointmentsDto;
+        }
+
         public async Task<IEnumerable<AppointmentDto>> GetFreeWithFilter(Guid? doctorId, string? departmentName, DateTime? date)
         {
             var firstHour = new TimeSpan(0, 0, 0);

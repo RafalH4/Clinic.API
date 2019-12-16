@@ -84,5 +84,11 @@ namespace Clinic.API.Repositories
                 .Include(x => x.MedOffice)
                 .Include(x => x.Doctor)
                 .Where(appointment => appointment.Patient.Equals(patient)).ToList());
+
+        public async Task<IEnumerable<Appointment>> GetByDoctor(Doctor doctor)
+             => await Task.FromResult(_context.Appointments
+                .Include(x => x.MedOffice)
+                .Include(x => x.Patient)
+                .Where(appointment => appointment.Patient.Equals(doctor)).ToList());
     }
 }
