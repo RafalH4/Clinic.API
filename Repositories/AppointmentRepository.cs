@@ -82,13 +82,20 @@ namespace Clinic.API.Repositories
         public async Task<IEnumerable<Appointment>> GetByPatient(Patient patient)
              => await Task.FromResult(_context.Appointments
                 .Include(x => x.MedOffice)
+                .Include(x => x.MedOffice.Department)
                 .Include(x => x.Doctor)
-                .Where(appointment => appointment.Patient.Equals(patient)).ToList());
+                .Where(appointment => appointment.Patient.Equals(patient))
+                .OrderBy(d=>d.Date)
+                .ToList());
 
         public async Task<IEnumerable<Appointment>> GetByDoctor(Doctor doctor)
              => await Task.FromResult(_context.Appointments
                 .Include(x => x.MedOffice)
+                .Include(x => x.MedOffice.Department)
                 .Include(x => x.Patient)
-                .Where(appointment => appointment.Patient.Equals(doctor)).ToList());
+                .Where(appointment => appointment.Doctor.Equals(doctor))
+                .Where(appointment => appointment.Patient != null)
+                .OrderBy(d => d.Date)
+                .ToList());
     }
 }
