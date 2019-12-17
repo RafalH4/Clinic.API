@@ -1,6 +1,8 @@
 ﻿using Clinic.API.Data;
 using Clinic.API.IRepositories;
 using Clinic.API.Models;
+using Clinic.API.Utilities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,6 +22,7 @@ namespace Clinic.API.Repositories
 
         public async Task<IEnumerable<Referral>> GetByAppointment(Appointment appointment)
             => await Task.FromResult(_context.Referrals
+                .Include(x => x.Appointment)
                 .Where(referral => referral.Appointment.Equals(appointment)).ToList());
 
         public async Task<IEnumerable<Referral>> GetByDate(DateTime date)
@@ -33,6 +36,7 @@ namespace Clinic.API.Repositories
         {
             await _context.Referrals.AddAsync(referral);
             await _context.SaveChangesAsync();
+            XMLCreator.CreateReferral(referral);
             await Task.CompletedTask;
         }
 

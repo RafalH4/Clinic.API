@@ -1,4 +1,5 @@
-﻿using Clinic.API.Models;
+﻿using Clinic.API.DTOs;
+using Clinic.API.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,7 @@ namespace Clinic.API.IServices
         Task<IEnumerable<Referral>> GetAll();
         Task<IEnumerable<Referral>> GetWithFilters();
         Task<Referral> GetById();
+        Task AddReferral(AddReferralDto referralDto, Guid appointmentId);
         Task AddReferral();
         Task UpdateReferral();
         Task DeleteReferral();

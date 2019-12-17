@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--Skierowanie c5b64db8-86fd-428c-770e-08d782e1b201-->
+<Dane>
+  <Pacjent>
+    <Imie>Tadeusz</Imie>
+    <Nazwisko>Brązowy</Nazwisko>
+    <PESEL>456612378</PESEL>
+    <Adres>456654</Adres>
+    <Miejscowosc>01-480asd</Miejscowosc>
+  </Pacjent>
+  <Lekarz>
+    <Imie>Jan</Imie>
+    <Nazwisko>Kowalski</Nazwisko>
+    <Nr_licencji>64e72047-4b42-4752-8cbd-59297029b6c6</Nr_licencji>
+  </Lekarz>
+  <SKierowanie_na>Lewatywa # Zalecenia: codziennie</SKierowanie_na>
+  <Data_wystawienia>2019-12-17T12:11:38.6017097+01:00</Data_wystawienia>
+</Dane>

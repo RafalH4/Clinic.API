@@ -10,6 +10,6 @@ namespace Clinic.API.DTOs.Get
         public Guid Id { get; set; }
         public AppointmentDto Appointment { get; set; }
         public DateTime CreatedAt { get; set; }
-        public TreatmentDto Treatment { get; set; }
+        public string Treatment { get; set; }
     }
 }
