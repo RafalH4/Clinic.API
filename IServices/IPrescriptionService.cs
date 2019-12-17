@@ -1,4 +1,5 @@
 ﻿using Clinic.API.DTOs;
+using Clinic.API.DTOs.Get;
 using Clinic.API.Models;
 using System;
 using System.Collections.Generic;
@@ -11,7 +12,8 @@ namespace Clinic.API.IServices
     {
         Task<IEnumerable<Prescription>> GetAll();
         Task<IEnumerable<Prescription>> GetWithFilters();
-        Task<Prescription> GetById();
+        Task<Prescription> GetById(Guid id);
+        Task<IEnumerable<PrescriptionDto>> GetByAppointmentId(Guid id);
         Task AddPrescription(AddPrescriptionDto prescription, Guid appointmentId);
         Task UpdatePrescription();
         Task DeletePrescription();

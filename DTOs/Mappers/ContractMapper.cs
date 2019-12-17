@@ -49,7 +49,7 @@ namespace Clinic.API.DTOs.Mappers
             contractDetailsDto.NumberOfMonths = contract.NumberOfMonths;
             contractDetailsDto.HoursPerMonth = contract.HoursPerMonth;
             contractDetailsDto.SalaryPerMonth = contract.SalaryPerMonth;
-            contractDetailsDto.Doctor = contract.Doctor.mapToDoctorDto();
+            contractDetailsDto.Doctor = contract.Doctor.MapToDoctorDto();
             contractDetailsDto.Department = contract.Department.mapToDepartmentDto();
             contractDetailsDto.DoctorFullName = String.Concat(contract.Doctor.FirstName, " ", contract.Doctor.SecondName);
             contractDetailsDto.DepartmentName = contract.Department.Name;

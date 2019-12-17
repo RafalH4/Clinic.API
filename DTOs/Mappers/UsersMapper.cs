@@ -9,7 +9,7 @@ namespace Clinic.API.DTOs.Mappers
 {
     public static class UsersMapper
     {
-        public static DoctorDetailDto mapToDoctorDetailDto(this Doctor doctor, List<Contract> contracts)
+        public static DoctorDetailDto MapToDoctorDetailDto(this Doctor doctor, List<Contract> contracts)
         {
             var newDoctor = new DoctorDetailDto();
             newDoctor.Id = doctor.Id;
@@ -33,7 +33,7 @@ namespace Clinic.API.DTOs.Mappers
             //newDoctor.Appointments= UZUPEŁNIĆ!!!
             return newDoctor;
         }
-        public static DoctorDto mapToDoctorDto(this Doctor doctor)
+        public static DoctorDto MapToDoctorDto(this Doctor doctor)
         {
             var newDoctor = new DoctorDto();
             newDoctor.Id = doctor.Id;
@@ -50,7 +50,7 @@ namespace Clinic.API.DTOs.Mappers
             return newDoctor;
         }
 
-        public static PatientDto mapToPatientDto(this Patient patient)
+        public static PatientDto MapToPatientDto(this Patient patient)
         {
             var newPatient = new PatientDto();
             newPatient.Id = patient.Id;

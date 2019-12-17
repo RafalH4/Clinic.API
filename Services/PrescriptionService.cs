@@ -1,4 +1,5 @@
 ﻿using Clinic.API.DTOs;
+using Clinic.API.DTOs.Get;
 using Clinic.API.DTOs.Mappers;
 using Clinic.API.IRepositories;
 using Clinic.API.IServices;
@@ -44,7 +45,21 @@ namespace Clinic.API.Services
             throw new NotImplementedException();
         }
 
-        public Task<Prescription> GetById()
+        public async Task<IEnumerable<PrescriptionDto>> GetByAppointmentId(Guid id)
+        {
+            var appointment = await _appointmentRepository.GetById(id);
+            if (appointment == null)
+                throw new Exception("bad appointment id");
+            var prescriptions = await _prescriptionRepository.GetByAppointment(appointment);
+            var prescriptionsDto = new List<PrescriptionDto>();
+            foreach (var prescription in prescriptions)
+                prescriptionsDto.Add(prescription.MapToPrescriptionDto());
+            
+            return prescriptionsDto;
+
+        }
+
+        public async Task<Prescription> GetById(Guid id)
         {
             throw new NotImplementedException();
         }

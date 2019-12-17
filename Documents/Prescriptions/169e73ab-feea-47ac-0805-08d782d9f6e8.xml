@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<!--Recepta_nr 802d78f4-3428-486d-eef5-08d782d49161-->
+<!--Recepta_nr 169e73ab-feea-47ac-0805-08d782d9f6e8-->
 <Dane>
   <Pacjent>
     <Imie>Tadeusz</Imie>
@@ -13,6 +13,6 @@
     <Nazwisko>Kowalski</Nazwisko>
     <Nr_licencji>64e72047-4b42-4752-8cbd-59297029b6c6</Nr_licencji>
   </Lekarz>
-  <Lek>Aspiryna # Zalecenia: 2x1</Lek>
-  <Data_wystawienia>2019-12-17T10:36:17.9669265+01:00</Data_wystawienia>
+  <Lek>Paracetamol # Zalecenia: 2x2</Lek>
+  <Data_wystawienia>2019-12-17T11:14:55.7715732+01:00</Data_wystawienia>
 </Dane>

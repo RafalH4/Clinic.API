@@ -23,9 +23,9 @@ namespace Clinic.API.DTOs.Mappers
 
             } 
             if (appointment.Patient != null)
-                newAppointmentDto.Patient = appointment.Patient.mapToPatientDto();
+                newAppointmentDto.Patient = appointment.Patient.MapToPatientDto();
             if (appointment.Doctor != null)
-                newAppointmentDto.Doctor = appointment.Doctor.mapToDoctorDto();
+                newAppointmentDto.Doctor = appointment.Doctor.MapToDoctorDto();
            
 
             //Przypisać recepty i skierowania

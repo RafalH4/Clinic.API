@@ -25,5 +25,12 @@ namespace Clinic.API.Controllers
             await _prescriptionService.AddPrescription(prescription, appointmentId);
             return Created("/doctors/5", null);
         }
+
+        [HttpGet("{appointmentId}")]
+        public async Task<IActionResult> GetByAppointmentId(Guid appointmentId)
+        {
+            var prescriptions = await _prescriptionService.GetByAppointmentId(appointmentId);
+            return Json(prescriptions);
+        }
     }
 }

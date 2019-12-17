@@ -54,7 +54,7 @@ namespace Clinic.API.Services
             var doctorsDetailDto = new List<DoctorDetailDto>();
             foreach (var doctor in doctors)
             {
-                var newDoctor = doctor.mapToDoctorDetailDto(doctor.Contracts);
+                var newDoctor = doctor.MapToDoctorDetailDto(doctor.Contracts);
                 doctorsDetailDto.Add(newDoctor);
             }
                 
@@ -67,21 +67,21 @@ namespace Clinic.API.Services
             var doctor = await _doctorRepository.GetByEmail(email);
             doctor.ifUserNotExists("Db doesn't contain this doctor");
 
-            return doctor.mapToDoctorDetailDto(doctor.Contracts);
+            return doctor.MapToDoctorDetailDto(doctor.Contracts);
         }
 
         public async Task<DoctorDetailDto> GetById(Guid id)
         {
             var doctor = await _doctorRepository.GetById(id);
             doctor.ifUserNotExists("Db doesn't contain this doctor");
-            return doctor.mapToDoctorDetailDto(doctor.Contracts);
+            return doctor.MapToDoctorDetailDto(doctor.Contracts);
         }
 
         public async Task<DoctorDetailDto> GetByPesel(string pesel)
         {
             var doctor = await _doctorRepository.GetByPesel(pesel);
             doctor.ifUserNotExists("Db doesn't contain this doctor");
-            return doctor.mapToDoctorDetailDto(doctor.Contracts);
+            return doctor.MapToDoctorDetailDto(doctor.Contracts);
         }
 
         public async Task UpdateDoctor(Guid id, string street, string postCode, 

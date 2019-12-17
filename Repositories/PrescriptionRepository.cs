@@ -2,6 +2,7 @@
 using Clinic.API.IRepositories;
 using Clinic.API.Models;
 using Clinic.API.Utilities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,6 +22,7 @@ namespace Clinic.API.Repositories
 
         public async Task<IEnumerable<Prescription>> GetByAppointment(Appointment appointment)
             => await Task.FromResult(_context.Prescriptions
+                .Include(x => x.Appointment)
                 .Where(prescription => prescription.Appointment.Equals(appointment)).ToList());
 
         public async Task<IEnumerable<Prescription>> GetByDate(DateTime date)
