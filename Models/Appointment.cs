@@ -13,7 +13,7 @@ namespace Clinic.API.Models
         public List<Referral> Referrals { get; set; }
         public List<Prescription> Prescriptions { get; set; }
         public MedOffice MedOffice { get; set; }
-        public Patient? Patient { get; set; }
+        public Patient Patient { get; set; }
         public Doctor Doctor { get; set; }
 
     }

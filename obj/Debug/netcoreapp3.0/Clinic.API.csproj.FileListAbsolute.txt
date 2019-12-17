@@ -138,4 +138,7 @@ E:\WAT\Inżynierka\Przychodnia lekarska\App\Clinic.API\bin\Debug\netcoreapp3.0\N
 E:\WAT\Inżynierka\Przychodnia lekarska\App\Clinic.API\bin\Debug\netcoreapp3.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 E:\WAT\Inżynierka\Przychodnia lekarska\App\Clinic.API\bin\Debug\netcoreapp3.0\Microsoft.IdentityModel.Protocols.dll
 E:\WAT\Inżynierka\Przychodnia lekarska\App\Clinic.API\bin\Debug\netcoreapp3.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+E:\WAT\Inżynierka\Przychodnia lekarska\App\Clinic.API\bin\Debug\netcoreapp3.0\MailKit.dll
+E:\WAT\Inżynierka\Przychodnia lekarska\App\Clinic.API\bin\Debug\netcoreapp3.0\MimeKit.dll
+E:\WAT\Inżynierka\Przychodnia lekarska\App\Clinic.API\bin\Debug\netcoreapp3.0\BouncyCastle.Crypto.dll
 E:\WAT\Inżynierka\Przychodnia lekarska\App\Clinic.API\obj\Debug\netcoreapp3.0\Clinic.API.MvcApplicationPartsAssemblyInfo.cache

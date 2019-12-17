@@ -7,6 +7,7 @@ using Clinic.API.DTOs;
 using Clinic.API.DTOs.Add;
 using Clinic.API.Filters;
 using Clinic.API.IServices;
+using Clinic.API.Utilities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -23,7 +24,7 @@ namespace Clinic.API.Controllers
             _appointmentService = appointmentService;
         }
 
-        [Authorize(Policy = "NurseRole")]
+      //  [Authorize(Policy = "NurseRole")]
         [HttpGet]
         public async Task<IActionResult> Get([FromQuery]DateTime? startDate,
             [FromQuery]DateTime? endDate,
@@ -34,15 +35,25 @@ namespace Clinic.API.Controllers
             [FromQuery]bool? isFree)
         {
             var appointments = await _appointmentService.GetWithFilter(startDate, endDate, doctorId, patientId, medOfficeId, departmentName, isFree);
-
             return Json(appointments);
         }
-        [HttpGet("addMe/{id}")]
-        public async Task<IActionResult> addMeToAppointment(Guid id)
+
+        [HttpGet("byId/{id}")]
+        public async Task<IActionResult> GetAppointmentById(Guid id)
         {
-            var assigment = new AddUserToAppointmentDto();
-            assigment.UserId = CurrentUserId;
-            assigment.AppointmentId = id;
+            var appointment = await _appointmentService.GetById(id);
+            return Json(appointment);
+        }
+
+
+        [HttpGet("addMe/{id}")]
+        public async Task<IActionResult> AddMeToAppointment(Guid id)
+        {
+            var assigment = new AddUserToAppointmentDto
+            {
+                UserId = CurrentUserId,
+                AppointmentId = id
+            };
             await _appointmentService.AddPatientToAppointment(assigment);
             return Created("/appointment", null);
         }
@@ -52,6 +63,12 @@ namespace Clinic.API.Controllers
         {
             var appointments = await _appointmentService.GetByPatientId(CurrentUserId);
             return Json(appointments);
+        }
+        [HttpGet("{appointmentId}")]
+        public async Task<IActionResult> DeletePatientFromAppointment(Guid appointmentId)
+        {
+            await _appointmentService.DeletePatientFromAppointment(appointmentId, CurrentUserId);
+            return NoContent();
         }
 
         [HttpGet("getDoctorAppointments")]

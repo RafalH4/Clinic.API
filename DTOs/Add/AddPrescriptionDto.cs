@@ -8,6 +8,6 @@ namespace Clinic.API.DTOs
 {
     public class AddPrescriptionDto
     {
-        public Drug Drug { get; set; }
+        public string Drug { get; set; }
     }
 }

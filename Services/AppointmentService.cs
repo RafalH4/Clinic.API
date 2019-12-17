@@ -128,6 +128,8 @@ namespace Clinic.API.Services
 
         public async Task<IEnumerable<AppointmentDto>> GetFreeWithFilter(Guid? doctorId, string? departmentName, DateTime? date)
         {
+            if (date == null)
+                date = DateTime.Now;
             var firstHour = new TimeSpan(0, 0, 0);
             var lastHour = new TimeSpan(23, 59, 59);
             DateTime firstDate = (DateTime)date;
@@ -168,6 +170,30 @@ namespace Clinic.API.Services
         public Task ModifyAppointment(AddAppointmentDto appointment)
         {
             throw new NotImplementedException();
+        }
+
+        public async Task<AppointmentDto> GetById(Guid id)
+        {
+            var appointment = await _appointmentRepository.GetById(id);
+            if (appointment == null)
+                throw new Exception("Bad appointment ID");
+
+            return appointment.mapToAppointmentDto();
+        }
+
+        public async Task DeletePatientFromAppointment(Guid AppointmentId, Guid UserId)
+        {
+            var user = await _patientRepository.GetById(UserId);
+            if (user == null)
+                throw new Exception("Bad userId");
+
+            var appointment = await _appointmentRepository.GetById(AppointmentId);
+
+
+            if (user.Appointments.Contains(appointment))
+                appointment.Patient = null;
+
+            await _appointmentRepository.UpdateAppointment(appointment);
         }
     }
 }

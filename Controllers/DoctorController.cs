@@ -8,6 +8,7 @@ using Clinic.API.IRepositories;
 using Clinic.API.IServices;
 using Clinic.API.Models;
 using Clinic.API.Services;
+using Clinic.API.Utilities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;

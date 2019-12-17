@@ -76,8 +76,10 @@ namespace Clinic.API.Repositories
         }
 
         public async Task<Appointment> GetById(Guid id)
-            => await Task.FromResult(_context.Appointments.SingleOrDefault(
-                appointment => appointment.Id == id));
+            => await Task.FromResult(_context.Appointments
+                .Include(appointment => appointment.Patient)
+                .Include(appointment => appointment.Doctor)
+                .SingleOrDefault(appointment => appointment.Id == id));
 
         public async Task<IEnumerable<Appointment>> GetByPatient(Patient patient)
              => await Task.FromResult(_context.Appointments

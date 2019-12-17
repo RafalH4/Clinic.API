@@ -13,8 +13,7 @@ namespace Clinic.API.Models
             : base(id, email, role, createdAt, 
                   firstName, secondName, pesel, phoneNumber, 
                   postCode, city, street, houseNumber)
-        {
-        }
+        {}
 
         public List<Appointment> Appointments { get; set; }
     }

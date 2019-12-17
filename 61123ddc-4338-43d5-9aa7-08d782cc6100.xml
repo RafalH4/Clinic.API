@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--Recepta_nr 61123ddc-4338-43d5-9aa7-08d782cc6100-->
+<Dane>
+  <Pacjent>
+    <Imie>Tadeusz</Imie>
+    <Nazwisko>Brązowy</Nazwisko>
+    <PESEL>456612378</PESEL>
+    <Adres>456654</Adres>
+    <Miejscowosc>01-480asd</Miejscowosc>
+  </Pacjent>
+  <Lekarz>
+    <Imie>Jan</Imie>
+    <Nazwisko>Kowalski</Nazwisko>
+    <Nr_licencji>64e72047-4b42-4752-8cbd-59297029b6c6</Nr_licencji>
+  </Lekarz>
+  <Lek>Aspiryna # Zalecenia: 2x1</Lek>
+  <Data_wystawienia>2019-12-17T09:37:40.8232794+01:00</Data_wystawienia>
+</Dane>

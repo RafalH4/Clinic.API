@@ -1,4 +1,7 @@
-﻿using Clinic.API.IServices;
+﻿using Clinic.API.DTOs;
+using Clinic.API.DTOs.Mappers;
+using Clinic.API.IRepositories;
+using Clinic.API.IServices;
 using Clinic.API.Models;
 using System;
 using System.Collections.Generic;
@@ -9,9 +12,26 @@ namespace Clinic.API.Services
 {
     public class PrescriptionService : IPrescriptionService
     {
-        public Task AddPrescription()
+        private readonly IPrescriptionRepository _prescriptionRepository;
+        private readonly IAppointmentRepository _appointmentRepository;
+
+        public PrescriptionService(
+            IPrescriptionRepository prescriptionRepository,
+            IAppointmentRepository appointmentRepository
+            )
         {
-            throw new NotImplementedException();
+            _prescriptionRepository = prescriptionRepository;
+            _appointmentRepository = appointmentRepository;
+        }
+        public async Task AddPrescription(AddPrescriptionDto prescription, Guid appointmentId)
+        {
+            var appointment = await _appointmentRepository.GetById(appointmentId);
+            if (appointment == null)
+                throw new Exception("Bad Appointment Id");
+
+            var newPrescription = prescription.MapToPrescription(appointment);
+
+            await _prescriptionRepository.AddPrescription(newPrescription);
         }
 
         public Task DeletePrescription()

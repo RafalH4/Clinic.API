@@ -12,6 +12,7 @@ namespace Clinic.API.IServices
 {
     public interface IAppointmentService
     {
+        Task<AppointmentDto> GetById(Guid id);
         Task<IEnumerable<AppointmentDto>> GetAll();
         Task<IEnumerable<AppointmentDto>> GetByPatientId(Guid id);
         Task<IEnumerable<AppointmentDto>> GetByDoctorId(Guid id);
@@ -28,5 +29,7 @@ namespace Clinic.API.IServices
         Task DeleteAppointment(Guid id);
         Task ModifyAppointment(AddAppointmentDto appointment);
         Task AddPatientToAppointment(AddUserToAppointmentDto assigment);
+        Task DeletePatientFromAppointment(Guid AppointmentId, Guid UserId);
+
     }
 }

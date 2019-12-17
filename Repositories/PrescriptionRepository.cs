@@ -1,6 +1,7 @@
 ﻿using Clinic.API.Data;
 using Clinic.API.IRepositories;
 using Clinic.API.Models;
+using Clinic.API.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,6 +35,7 @@ namespace Clinic.API.Repositories
         {
             await _context.Prescriptions.AddAsync(prescription);
             await _context.SaveChangesAsync();
+            XMLCreator.CreatePrescription(prescription);
             await Task.CompletedTask;
         }
 
