@@ -50,6 +50,19 @@ namespace Clinic.API.Services
             throw new NotImplementedException();
         }
 
+        public async Task<IEnumerable<ReferralDto>> GetByAppointmentId(Guid id)
+        {
+            var appointment = await _appointmentRepository.GetById(id);
+            if (appointment == null)
+                throw new Exception("bad appointment id");
+            var referrals = await _referralRepository.GetByAppointment(appointment);
+            var referralsDto = new List<ReferralDto>();
+            foreach (var referral in referrals)
+                referralsDto.Add(referral.MapToReferralDto());
+
+            return referralsDto;
+        }
+
         public Task<Referral> GetById()
         {
             throw new NotImplementedException();

@@ -31,6 +31,7 @@ namespace Clinic.API.Repositories
 
         public async Task<Referral> GetById(Guid id)
             => await Task.FromResult(_context.Referrals
+                .Include(x => x.Appointment)
                 .SingleOrDefault(referral => referral.Id.Equals(id)));
         public async Task AddReferral(Referral referral)
         {

@@ -29,7 +29,7 @@ namespace Clinic.API.Controllers
         [HttpGet("{appointmentId}")]
         public async Task<IActionResult> GetByAppointmentId(Guid appointmentId)
         {
-            var prescriptions = 11;//await _prescriptionService.GetByAppointmentId(appointmentId);
+            var prescriptions = await _referralService.GetByAppointmentId(appointmentId);
             return Json(prescriptions);
         }
     }

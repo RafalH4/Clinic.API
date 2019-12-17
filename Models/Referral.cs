@@ -7,6 +7,8 @@ namespace Clinic.API.Models
 {
     public class Referral
     {
+        internal object A;
+
         public Guid Id { get; set; }
         public Appointment Appointment { get; set; }
         public DateTime CreatedAt { get; set; }
