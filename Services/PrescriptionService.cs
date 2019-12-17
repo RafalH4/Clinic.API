@@ -15,14 +15,16 @@ namespace Clinic.API.Services
     {
         private readonly IPrescriptionRepository _prescriptionRepository;
         private readonly IAppointmentRepository _appointmentRepository;
-
+        private readonly IPatientRepository _patientRepository;
         public PrescriptionService(
             IPrescriptionRepository prescriptionRepository,
-            IAppointmentRepository appointmentRepository
+            IAppointmentRepository appointmentRepository,
+            IPatientRepository patientRepository
             )
         {
             _prescriptionRepository = prescriptionRepository;
             _appointmentRepository = appointmentRepository;
+            _patientRepository = patientRepository;
         }
         public async Task AddPrescription(AddPrescriptionDto prescription, Guid appointmentId)
         {
@@ -62,6 +64,20 @@ namespace Clinic.API.Services
         public async Task<Prescription> GetById(Guid id)
         {
             throw new NotImplementedException();
+        }
+
+        public async Task<IEnumerable<PrescriptionDto>> GetByPatientId(Guid patientId)
+        {
+            var user = await _patientRepository.GetById(patientId);
+            if (user == null)
+                throw new Exception("Bad user id");
+
+            var prescriptions = await _prescriptionRepository.GetByPatient(user);
+            var prescriptionsDto = new List<PrescriptionDto>();
+            foreach (var prescription in prescriptions)
+                prescriptionsDto.Add(prescription.MapToPrescriptionDto());
+
+            return prescriptionsDto;
         }
 
         public Task<IEnumerable<Prescription>> GetWithFilters()

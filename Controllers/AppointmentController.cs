@@ -102,6 +102,15 @@ namespace Clinic.API.Controllers
             await _appointmentService.AddAppointment(appointment);
             return Created("/appointment", null);
         }
+
+        [HttpPut("anamnesis")]
+        public async Task<IActionResult> AddAnamnesis([FromBody] AddAnamnesisToAppointmentDto anamnesis)
+        {
+            await _appointmentService.AddAnamnesis(anamnesis);
+            return Created("/appointment", null);
+        }
+
+
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(Guid id)
         {

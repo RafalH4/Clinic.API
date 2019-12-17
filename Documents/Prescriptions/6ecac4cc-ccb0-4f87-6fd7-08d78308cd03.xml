@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--Recepta_nr 6ecac4cc-ccb0-4f87-6fd7-08d78308cd03-->
+<Dane>
+  <Pacjent>
+    <Imie>Tadeusz</Imie>
+    <Nazwisko>Brązowy</Nazwisko>
+    <PESEL>456612378</PESEL>
+    <Adres>456654</Adres>
+    <Miejscowosc>01-480asd</Miejscowosc>
+  </Pacjent>
+  <Lekarz>
+    <Imie>Jan</Imie>
+    <Nazwisko>Kowalski</Nazwisko>
+    <Nr_licencji>64e72047-4b42-4752-8cbd-59297029b6c6</Nr_licencji>
+  </Lekarz>
+  <Lek>Eutanazol # Zalecenia: 3x1</Lek>
+  <Data_wystawienia>2019-12-17T16:50:11.828632+01:00</Data_wystawienia>
+</Dane>

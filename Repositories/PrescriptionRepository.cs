@@ -54,5 +54,11 @@ namespace Clinic.API.Repositories
             await _context.SaveChangesAsync();
             await Task.CompletedTask;
         }
+
+        public async Task<IEnumerable<Prescription>> GetByPatient(Patient patient)
+            => await Task.FromResult(_context.Prescriptions
+            .Include(x => x.Appointment)
+            .Include(x => x.Appointment.Doctor)
+            .Where(prescription => prescription.Appointment.Patient.Equals(patient)).ToList());
     }
 }

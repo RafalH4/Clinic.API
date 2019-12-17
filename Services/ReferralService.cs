@@ -15,13 +15,16 @@ namespace Clinic.API.Services
     {
         private readonly IReferralRepository _referralRepository;
         private readonly IAppointmentRepository _appointmentRepository;
+        private readonly IPatientRepository _patientRepository;
 
         public ReferralService(
             IReferralRepository referralRepository,
-            IAppointmentRepository appointmentRepository)
+            IAppointmentRepository appointmentRepository,
+            IPatientRepository patientRepository)
         {
             _referralRepository = referralRepository;
             _appointmentRepository = appointmentRepository;
+            _patientRepository = patientRepository;
 
         }
         public async Task AddReferral(AddReferralDto referralDto, Guid appointmentId)
@@ -66,6 +69,20 @@ namespace Clinic.API.Services
         public Task<Referral> GetById()
         {
             throw new NotImplementedException();
+        }
+
+        public async Task<IEnumerable<ReferralDto>> GetByPatientId(Guid patientId)
+        {
+            var user = await _patientRepository.GetById(patientId);
+            if (user == null)
+                throw new Exception("Bad user id");
+            var referrals = await _referralRepository.GetByPatient(user);
+            var referralsDto = new List<ReferralDto>();
+            foreach (var referral in referrals)
+                referralsDto.Add(referral.MapToReferralDto());
+
+            return referralsDto;
+
         }
 
         public Task<IEnumerable<Referral>> GetWithFilters()

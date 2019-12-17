@@ -195,5 +195,15 @@ namespace Clinic.API.Services
 
             await _appointmentRepository.UpdateAppointment(appointment);
         }
+
+        public async Task AddAnamnesis(AddAnamnesisToAppointmentDto anamnesis)
+        {
+            var appointment = await _appointmentRepository.GetById(anamnesis.Id);
+            if (appointment == null)
+                throw new Exception("Bad appointment id");
+
+            appointment.Anamnesis = anamnesis.Anamnesis;
+            await _appointmentRepository.UpdateAppointment(appointment);
+        }
     }
 }

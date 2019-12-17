@@ -10,6 +10,7 @@ namespace Clinic.API.IRepositories
     {
         Task<IEnumerable<Referral>> Get();
         Task<IEnumerable<Referral>> GetByAppointment(Appointment appointment);
+        Task<IEnumerable<Referral>> GetByPatient (Patient patient);
         Task<IEnumerable<Referral>> GetByDate(DateTime date);
         Task<Referral> GetById(Guid id);
         Task AddReferral(Referral referral);

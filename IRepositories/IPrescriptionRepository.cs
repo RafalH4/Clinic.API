@@ -11,6 +11,7 @@ namespace Clinic.API.IRepositories
         Task<IEnumerable<Prescription>> Get();
         Task<IEnumerable<Prescription>> GetByAppointment(Appointment appointment);
         Task<IEnumerable<Prescription>> GetByDate(DateTime date);
+        Task<IEnumerable<Prescription>> GetByPatient(Patient patient);
         Task<Prescription> GetById(Guid id);
         Task AddPrescription(Prescription prescription);
         Task DeletePrescription(Prescription prescription);

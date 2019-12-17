@@ -29,6 +29,7 @@ namespace Clinic.API.IServices
         Task DeleteAppointment(Guid id);
         Task ModifyAppointment(AddAppointmentDto appointment);
         Task AddPatientToAppointment(AddUserToAppointmentDto assigment);
+        Task AddAnamnesis(AddAnamnesisToAppointmentDto anamnesis);
         Task DeletePatientFromAppointment(Guid AppointmentId, Guid UserId);
 
     }

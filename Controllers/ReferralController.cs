@@ -11,7 +11,7 @@ namespace Clinic.API.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    public class ReferralController : Controller
+    public class ReferralController : ApiBaseController
     {
         private readonly IReferralService _referralService;
         public ReferralController(IReferralService referralService)
@@ -31,6 +31,13 @@ namespace Clinic.API.Controllers
         {
             var prescriptions = await _referralService.GetByAppointmentId(appointmentId);
             return Json(prescriptions);
+        }
+
+        [HttpGet("myReferrals")]
+        public async Task<IActionResult> GetMyPatientRefferals()
+        {
+            var referrals = await _referralService.GetByPatientId(CurrentUserId);
+            return Json(referrals);
         }
     }
 }

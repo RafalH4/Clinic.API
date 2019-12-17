@@ -11,7 +11,7 @@ namespace Clinic.API.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    public class PrescriptionController : Controller 
+    public class PrescriptionController : ApiBaseController 
     {
         private readonly IPrescriptionService _prescriptionService;
         public PrescriptionController(IPrescriptionService prescriptionService)
@@ -30,6 +30,13 @@ namespace Clinic.API.Controllers
         public async Task<IActionResult> GetByAppointmentId(Guid appointmentId)
         {
             var prescriptions = await _prescriptionService.GetByAppointmentId(appointmentId);
+            return Json(prescriptions);
+        }
+
+        [HttpGet("myPrescriptions")]
+        public async Task<IActionResult> GetMyPatientRefferals()
+        {
+            var prescriptions = await _prescriptionService.GetByPatientId(CurrentUserId);
             return Json(prescriptions);
         }
     }

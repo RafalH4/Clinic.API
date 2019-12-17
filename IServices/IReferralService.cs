@@ -13,6 +13,7 @@ namespace Clinic.API.IServices
         Task<IEnumerable<Referral>> GetAll();
         Task<IEnumerable<Referral>> GetWithFilters();
         Task<Referral> GetById();
+        Task<IEnumerable<ReferralDto>> GetByPatientId(Guid patientId);
         Task AddReferral(AddReferralDto referralDto, Guid appointmentId);
         Task<IEnumerable<ReferralDto>> GetByAppointmentId(Guid id);
         Task AddReferral();
