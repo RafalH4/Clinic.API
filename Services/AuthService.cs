@@ -3,6 +3,7 @@ using Clinic.API.Extensions;
 using Clinic.API.IRepositories;
 using Clinic.API.IServices;
 using Clinic.API.Models;
+using Clinic.API.Utilities;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
@@ -62,6 +63,7 @@ namespace Clinic.API.Services
 
                 root.PasswordSalt = hmac.Key;
                 root.PasswordHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(userForRegisterDto.Password));
+                EmailSender.SendEmail(userForRegisterDto.Email, "Witaj nowy użytkowniku", "Zapraszamy do korzystania z aplikacji");
                 await _rootRepository.AddRoot(root);
 
             } else if(userForRegisterDto.Role == "doctor")
@@ -73,6 +75,7 @@ namespace Clinic.API.Services
 
                 doctor.PasswordSalt = hmac.Key;
                 doctor.PasswordHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(userForRegisterDto.Password));
+                EmailSender.SendEmail(userForRegisterDto.Email, "Witaj nowy użytkowniku", "Zapraszamy do korzystania z aplikacji");
                 await _doctorRepository.AddDoctor(doctor);
 
             } else if(userForRegisterDto.Role == "nurse")
@@ -84,6 +87,7 @@ namespace Clinic.API.Services
 
                 nurse.PasswordSalt = hmac.Key;
                 nurse.PasswordHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(userForRegisterDto.Password));
+                EmailSender.SendEmail(userForRegisterDto.Email, "Witaj nowy użytkowniku", "Zapraszamy do korzystania z aplikacji");
                 await _nurseRepository.AddNurse(nurse);
 
             } else if (userForRegisterDto.Role == "patient")
@@ -95,6 +99,7 @@ namespace Clinic.API.Services
 
                 patient.PasswordSalt = hmac.Key;
                 patient.PasswordHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(userForRegisterDto.Password));
+                EmailSender.SendEmail(userForRegisterDto.Email, "Witaj nowy użytkowniku", "Zapraszamy do korzystania z aplikacji");
                 await _patientRepository.AddPatient(patient);
             }
         }

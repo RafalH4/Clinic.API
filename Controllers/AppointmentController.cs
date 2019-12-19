@@ -78,7 +78,6 @@ namespace Clinic.API.Controllers
             return Json(appointments);
         }
 
-        // [Authorize(Policy = "PatientRole")]
         [HttpGet("free")]
         public async Task<IActionResult> GetFree(
             [FromQuery]Guid? doctorId,
